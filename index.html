@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رزومه حسین سلمانی</title>
+
+    <link rel="stylesheet" href="font.css">
+
+    <style>
+        :root {
+            --color-pcb-deep: #0B1310;
+            --color-panel-jade: #0E2018;
+            --color-neon-circuit: #50C878;
+            --color-gold-pin: #D4AF37;
+
+            --text-light: #f3f4f6;
+            --text-gray: #a8b3ae;
+
+            --bg-filter: linear-gradient(rgba(11, 19, 16, 0.88), rgba(11, 19, 16, 0.94));
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text-light);
+            line-height: 1.9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            background-image: var(--bg-filter), url('images/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* ==========================================================================
+           بخش اول: پورتفولیو تعاملی و مینی‌مال (ایده دوم: ساختار متقاطع برد الکترونیکی)
+           ========================================================================== */
+        .hero-section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 6%;
+            position: relative;
+            border-bottom: 1px solid rgba(80, 200, 120, 0.1);
+            background: radial-gradient(circle at 10% 20%, rgba(80, 200, 120, 0.04), transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(214, 175, 55, 0.03), transparent 40%);
+        }
+
+        /* ساختار متقاطع و نامتقارن الهام گرفته از تصویر نمونه */
+        .asymmetric-layout {
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.8fr;
+            gap: 60px;
+            align-items: center;
+            text-align: right;
+            margin-bottom: 60px;
+        }
+
+        .hero-visual-side {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* فریم عکس مینی‌مال با خطوط راهنمای برد الکترونیکی */
+        .hero-profile-frame {
+            position: relative;
+            padding: 10px;
+        }
+
+        .hero-profile-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            border-top: 3px solid var(--color-neon-circuit);
+            border-right: 3px solid var(--color-neon-circuit);
+        }
+
+        .hero-profile-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            border-bottom: 3px solid var(--color-gold-pin);
+            border-left: 3px solid var(--color-gold-pin);
+        }
+
+        .hero-image {
+            width: 220px;
+            height: 220px;
+            border-radius: 4px;
+            object-fit: cover;
+            background: var(--color-pcb-deep);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            filter: grayscale(20%);
+        }
+
+        .hero-text-side {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .hero-text-side h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        .hero-text-side h2 {
+            font-size: 1.4rem;
+            color: var(--color-neon-circuit);
+            font-weight: 700;
+        }
+
+        .hero-text-side p {
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            max-width: 650px;
+            line-height: 1.8;
+        }
+
+        /* دکمه دانلود رزومه (PDF) هماهنگ با تم */
+        .btn-download-resume {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            font-size: 0.95rem;
+            background: transparent;
+            color: var(--color-gold-pin);
+            border: 1px solid var(--color-gold-pin);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .btn-download-resume:hover {
+            background: rgba(214, 175, 55, 0.08);
+            box-shadow: 0 0 15px rgba(214, 175, 55, 0.15);
+            transform: translateY(-1px);
+        }
+
+        /* بخش آمار عددی یکپارچه و مینی‌مال */
+        .hero-stats-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+            border-top: 1px solid rgba(80, 200, 120, 0.12);
+            padding-top: 15px;
+        }
+
+        .stat-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-box:not(:first-child) {
+            border-right: 1px solid rgba(80, 200, 120, 0.12);
+            padding-right: 30px;
+        }
+
+        .stat-box .stat-num {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--text-light);
+        }
+
+        .stat-box .stat-num.highlight {
+            color: var(--color-gold-pin);
+        }
+
+        .stat-box .stat-desc {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin: 0;
+        }
+
+        /* کارت‌های تخصصی زیرین */
+        .tech-cards-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1100px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+
+        .tech-card {
+            background: rgba(14, 32, 24, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(80, 200, 120, 0.12);
+            border-radius: 20px;
+            padding: 30px 24px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: right;
+        }
+
+        .tech-card:hover {
+            border-color: var(--color-neon-circuit);
+            transform: translateY(-5px);
+            background: rgba(14, 32, 24, 0.7);
+            box-shadow: 0 20px 40px rgba(80, 200, 120, 0.05);
+        }
+
+        .tech-card .icon-holder {
+            color: var(--color-gold-pin);
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .tech-card h3 {
+            font-size: 1.15rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .tech-card p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.75;
+        }
+
+        /* دکمه اسکرول به پایین صفحه */
+        .scroll-down-btn {
+            position: absolute;
+            bottom: 25px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .scroll-down-btn:hover {
+            color: var(--color-neon-circuit);
+        }
+
+        .scroll-down-btn svg {
+            animation: arrowBounce 2s infinite;
+            color: var(--color-neon-circuit);
+        }
+
+        @keyframes arrowBounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-6px);
+            }
+
+            60% {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* ==========================================================================
+           بخش دوم: ساختار اصلی رزومه (کاملاً دست‌نخورده مطابق فایل ارسالی شما)
+           ========================================================================== */
+        .resume-wrapper {
+            padding: 60px 6% 30px 6%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .portfolio-container {
+            max-width: 1250px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 50px;
+            align-items: start;
+            flex-grow: 1;
+        }
+
+        .sidebar-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: sticky;
+            top: 50px;
+        }
+
+        .interactive-panel {
+            background: rgba(14, 32, 24, 0.85);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(80, 200, 120, 0.2);
+            border-radius: 28px;
+            padding: 35px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.03);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @supports (backdrop-filter: blur(40px)) or (-webkit-backdrop-filter: blur(40px)) {
+            .interactive-panel {
+                background: rgba(14, 32, 24, 0.52);
+            }
+        }
+
+        .interactive-panel:hover {
+            border-color: var(--color-neon-circuit);
+            box-shadow: 0 50px 90px rgba(80, 200, 120, 0.12);
+        }
+
+        .hero-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            height: fit-content;
+        }
+
+        .info-panel h3 {
+            font-size: 1.2rem;
+            color: var(--color-neon-circuit);
+            margin-bottom: 20px;
+            font-weight: 800;
+            border-bottom: 1px solid rgba(80, 200, 120, 0.15);
+            padding-bottom: 10px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .info-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-list .label {
+            color: var(--text-gray);
+        }
+
+        .info-list .value {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .avatar-container {
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .avatar-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 28px;
+            border: 2px solid var(--color-gold-pin);
+            padding: 6px;
+            object-fit: cover;
+            background: var(--color-pcb-deep);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .interactive-panel:hover .avatar-image {
+            transform: scale(1.05);
+            border-color: var(--color-neon-circuit);
+        }
+
+        .hero-panel h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .hero-panel h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--color-neon-circuit);
+            margin-bottom: 25px;
+        }
+
+        .hero-panel p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            text-align: justify;
+        }
+
+        .content-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .panel-title {
+            font-size: 1.4rem;
+            color: var(--color-neon-circuit);
+            margin-bottom: 28px;
+            font-weight: 900;
+        }
+
+        .content-card {
+            background: rgba(80, 200, 120, 0.04);
+            border: 1px solid rgba(80, 200, 120, 0.12);
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 20px;
+        }
+
+        .content-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card-main-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .card-meta-time {
+            font-size: 0.85rem;
+            color: var(--color-gold-pin);
+            font-weight: bold;
+        }
+
+        .card-details-list {
+            list-style-position: inside;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .card-details-list li {
+            margin-bottom: 6px;
+        }
+
+        .certificates-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .cert-card {
+            background: rgba(11, 19, 16, 0.6);
+            border: 1px solid rgba(80, 200, 120, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+        }
+
+        .cert-media {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: var(--color-pcb-deep);
+            display: block;
+            overflow: hidden;
+        }
+
+        .cert-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cert-details {
+            padding: 20px;
+            background: rgba(14, 32, 24, 0.98);
+            border-top: 1px solid rgba(80, 200, 120, 0.15);
+        }
+
+        .cert-details h4 {
+            font-size: 1.05rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .skills-accordion {
+            outline: none;
+        }
+
+        .skills-accordion summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            list-style: none;
+            margin-bottom: 0;
+            user-select: none;
+        }
+
+        .skills-accordion summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .skills-accordion[open] summary {
+            margin-bottom: 25px;
+            border-bottom: 1px dashed rgba(80, 200, 120, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            color: var(--color-gold-pin);
+        }
+
+        .skills-accordion[open] .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-tag {
+            background: rgba(80, 200, 120, 0.06);
+            border: 1px solid rgba(80, 200, 120, 0.2);
+            padding: 12px 15px;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(80, 200, 120, 0.15);
+            border-color: var(--color-neon-circuit);
+            color: var(--color-neon-circuit);
+            transform: scale(1.03);
+        }
+
+        .communication-hub {
+            text-align: center;
+        }
+
+        .action-buttons-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 32px;
+            border-radius: 16px;
+            font-weight: 900;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            min-width: 210px;
+        }
+
+        .btn-email {
+            background: var(--color-gold-pin);
+            color: #000000;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-email:hover {
+            background: #e5be49;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-telegram {
+            background: transparent;
+            color: var(--color-neon-circuit);
+            border: 2px solid var(--color-neon-circuit);
+            box-shadow: 0 10px 30px rgba(80, 200, 120, 0.05);
+        }
+
+        .btn-telegram:hover {
+            background: var(--color-neon-circuit);
+            color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(80, 200, 120, 0.3);
+        }
+
+        .links-hub-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 5px;
+        }
+
+        .link-card-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(80, 200, 120, 0.03);
+            border: 1px solid rgba(80, 200, 120, 0.15);
+            padding: 18px 24px;
+            border-radius: 18px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .link-card-btn:hover {
+            background: rgba(80, 200, 120, 0.09);
+            border-color: var(--color-neon-circuit);
+            transform: translateX(-5px);
+            box-shadow: 0 10px 25px rgba(80, 200, 120, 0.06);
+        }
+
+        .link-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .link-badge {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--color-gold-pin);
+            background: rgba(214, 175, 55, 0.08);
+            padding: 4px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(214, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .link-card-btn:hover .link-badge {
+            color: #000000;
+            background: var(--color-gold-pin);
+            border-color: var(--color-gold-pin);
+        }
+
+        .site-footer {
+            width: 100%;
+            max-width: 1250px;
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(80, 200, 120, 0.15);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .site-footer span {
+            color: var(--color-neon-circuit);
+        }
+
+        /* ---------- اصلاحات پاسخگویی (Responsive) ---------- */
+        @media (max-width: 950px) {
+            .asymmetric-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .hero-text-side {
+                align-items: center;
+            }
+
+            .hero-image {
+                width: 170px;
+                height: 170px;
+            }
+
+            .tech-cards-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 0 5%;
+            }
+
+            .tech-card {
+                text-align: center;
+            }
+
+            .tech-card .icon-holder {
+                justify-content: center;
+            }
+
+            .resume-wrapper {
+                padding: 40px 5% 30px 5%;
+            }
+
+            .portfolio-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .content-flow {
+                gap: 30px;
+            }
+
+            .sidebar-flow {
+                position: static;
+            }
+
+            .hero-panel h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-panel h2 {
+                font-size: 1.1rem;
+            }
+
+            .avatar-image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .action-buttons-group {
+                flex-direction: column;
+                width: 100%;
+                gap: 15px;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+
+            .link-card-btn {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .link-title {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text-side h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-text-side h2 {
+                font-size: 1.1rem;
+            }
+
+            .interactive-panel {
+                padding: 22px !important;
+                border-radius: 22px;
+            }
+
+            .hero-panel h1 {
+                font-size: 1.8rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            }
+
+            .skill-tag {
+                font-size: 0.85rem;
+                padding: 10px;
+            }
+
+            .panel-title {
+                font-size: 1.2rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .card-meta-time {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero-section">
+        <div class="asymmetric-layout">
+
+            <div class="hero-visual-side">
+                <div class="hero-profile-frame">
+                    <img src="images/profile.jpg" alt="حسین سلمانی" class="hero-image">
+                </div>
+            </div>
+
+            <div class="hero-text-side">
+                <h1>حسین سلمانی</h1>
+                <h2>تکنسین پشتیبانی دسکتاپ (Desktop Support Technician)</h2>
+                <p style="margin-bottom: 20px;">تکنسین پشتیبانی دسکتاپ با تمرکز بر عیب یابی کلاینت ها، اسمبل سخت افزار و
+                    آماده سازی سیستم عامل. مسلط به رفع اختلالات سمت کاربر و دارای درک مطلوب از مبانی شبکه؛ با انگیزه ی
+                    بالا جهت ورود به محیط های عملیاتی و توسعه ی تخصصی مسیر شغلی در حوزه زیرساخت</p>
+
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap; margin-bottom: 10px;">
+                    <a href="#" download class="btn-download-resume">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 5px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        دانلود فایل رزومه (PDF)
+                    </a>
+                </div>
+
+                <div class="hero-stats-container">
+                    <div class="stat-box">
+                        <span class="stat-num">کمتر از ۱ سال</span>
+                        <span class="stat-desc">سابقه کاری</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-num highlight">۴ گواهینامه</span>
+                        <span class="stat-desc">تخصصی و معتبر</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tech-cards-row">
+            <div class="tech-card">
+                <div class="icon-holder">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <h3>کاربر و نرم افزار (Tier 1)</h3>
+                <p>پاسخگویی به تیکت‌ها، رفع خطاهای سیستم عامل، نصب و پیکربندی نرم‌افزار ها و راهنمایی کاربران برای حل
+                    مشکلات روزمره</p>
+            </div>
+
+            <div class="tech-card">
+                <div class="icon-holder">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <line x1="9" y1="1" x2="9" y2="4"></line>
+                        <line x1="15" y1="1" x2="15" y2="4"></line>
+                        <line x1="9" y1="20" x2="9" y2="23"></line>
+                        <line x1="15" y1="20" x2="15" y2="23"></line>
+                        <line x1="20" y1="9" x2="23" y2="9"></line>
+                        <line x1="20" y1="15" x2="23" y2="15"></line>
+                        <line x1="1" y1="9" x2="4" y2="9"></line>
+                        <line x1="1" y1="15" x2="4" y2="15"></line>
+                    </svg>
+                </div>
+                <h3>پشتیبانی سخت افزاری (Tier 2)</h3>
+                <p>عیب یابی فیزیکی کلاینت ها، ارتقا و اسمبل قطعات، تعویض تجهیزات و سرویس دوره ای کیس های کامپیوتر</p>
+            </div>
+
+            <div class="tech-card">
+                <div class="icon-holder">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <h3>شبکه و اشتیاق به توسعه آن</h3>
+                <p>تسلط بر مفاهیم و اصول پایه‌ای شبکه و کاربرد عملی آن در پشتیبانی سیستم‌ها؛ دارای انگیزه‌ای بالا جهت
+                    ورود به موقعیت‌های کاری این حوزه و توسعه تخصصی این مسیر</p>
+            </div>
+        </div>
+
+        <a href="#resume-section-start" class="scroll-down-btn">
+            <span>مشاهده جزئیات رزومه فنی</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+        </a>
+    </header>
+
+    <div id="resume-section-start"></div>
+
+    <div class="resume-wrapper">
+        <div class="portfolio-container">
+
+            <div class="sidebar-flow">
+                <aside class="interactive-panel hero-panel">
+                    <div class="avatar-container">
+                        <img src="images/profile.jpg" alt="حسین سلمانی" class="avatar-image">
+                    </div>
+                    <h1>حسین سلمانی</h1>
+                    <h2>Desktop Support Technician</h2>
+                    <p>تکنسین پشتیبانی دسکتاپ با تمرکز بر عیب یابی کلاینت ها، اسمبل سخت افزار و آماده سازی سیستم عامل با
+                        تکیه بر سوابق کارگاهی و کارآموزی. مسلط به حل مشکلات سمت کاربر و دارای درک مطلوب از مبانی شبکه؛
+                        آماده ی ورود به محیط های عملیاتی جهت ارائه پشتیبانی موثر به کاربران و توسعه ی تخصصی مسیر شغلی در
+                        حوزه زیرساخت و شبکه</p>
+                </aside>
+
+                <aside class="interactive-panel info-panel">
+                    <h3>اطلاعات پایه</h3>
+                    <ul class="info-list">
+                        <li>
+                            <span class="label">تاریخ تولد:</span>
+                            <span class="value">۱۳۸۱</span>
+                        </li>
+                        <li>
+                            <span class="label">محل سکونت:</span>
+                            <span class="value">شیراز</span>
+                        </li>
+                        <li>
+                            <span class="label">وضعیت نظام وظیفه:</span>
+                            <span class="value">مشمول</span>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+
+            <main class="content-flow">
+
+                <section class="interactive-panel">
+                    <h3 class="panel-title">سوابق کاری</h3>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <span class="card-main-title">تکنسین Helpdesk | علوم پزشکی شیراز</span>
+                            <span class="card-meta-time">مهر ۱۴۰۴ - آذر ۱۴۰۴</span>
+                        </div>
+                        <ul class="card-details-list">
+                            <li>(همکاری بعنوان کارآموز)</li>
+                            <li>انجام سرویس اولیه سخت افزار</li>
+                            <li>ارتقا سخت افزاری سیستم ها</li>
+                            <li>عیب یابی و حل مشکلات سخت افزاری و نرم افزاری پایه ای کاربران</li>
+                            <li>نصب و پیکربندی سیستم عامل ویندوز و نرم‌افزار ها</li>
+                            <li>سوکت زدن کابل های شبکه</li>
+                            <li>همکاری در انجام تسک های پسیو شبکه</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <span class="card-main-title">Linux SysAdmin | انتقال داده آریا سرو</span>
+                            <span class="card-meta-time">اردیبهشت ۱۴۰۳ - تیر ۱۴۰۳</span>
+                        </div>
+                        <ul class="card-details-list">
+                            <li>(همکاری بعنوان کارآموز)</li>
+                            <li>بکارگیری مبانی سیستم‌عامل گنو/لینوکس در انجام تسک ها</li>
+                            <li>بکارگیری مبانی شبکه و کسب تجربه عملی</li>
+                            <li>تجربه کار با سرویس های پایه</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <span class="card-main-title">Linux SysAdmin | آرکان</span>
+                            <span class="card-meta-time">فروردین ۱۴۰۳ - اردیبهشت ۱۴۰۳</span>
+                        </div>
+                        <ul class="card-details-list">
+                            <li>(همکاری بعنوان کارآموز)</li>
+                            <li>یادگیری و بکارگیری مبانی سیستم‌عامل گنو/لینوکس در انجام تسک ها</li>
+                            <li>بکارگیری مبانی شبکه و کسب تجربه عملی</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <span class="card-main-title">تکنسین Helpdesk | دانشگاه شهید باهنر شیراز</span>
+                            <span class="card-meta-time">خرداد ۱۴۰۲ - مرداد ۱۴۰۲</span>
+                        </div>
+                        <ul class="card-details-list">
+                            <li>(همکاری بعنوان کارآموز)</li>
+                            <li>انجام سرویس های اولیه سخت افزاری</li>
+                            <li>نصب و پیکربندی سیستم عامل ویندوز و نرم‌افزار ها</li>
+                        </ul>
+                    </div>
+
+                </section>
+
+                <section class="interactive-panel">
+                    <h3 class="panel-title">تحصیلات</h3>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <span class="card-main-title">کارشناسی تکنولوژی نرم افزار</span>
+                            <span class="card-meta-time">بهمن ۱۴۰۲ - بهمن ۱۴۰۴</span>
+                        </div>
+                        <ul class="card-details-list">
+                            <li>موسسه آموزش عالی زند شیراز</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <span class="card-main-title">کاردانی فناوری اطلاعات</span>
+                            <span class="card-meta-time">مهر ۱۴۰۰ - اسفند ۱۴۰۲</span>
+                        </div>
+                        <ul class="card-details-list">
+                            <li>دانشگاه ملی مهارت</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <span class="card-main-title">دیپلم شبکه و نرم افزار</span>
+                            <span class="card-meta-time">شهریور ۱۴۰۰</span>
+                        </div>
+                        <ul class="card-details-list">
+                            <li>هنرستان فنی حرفه ای شهید مهدی خراجی</li>
+                        </ul>
+                    </div>
+
+                </section>
+
+                <section class="interactive-panel">
+                    <h3 class="panel-title">مدارک و گواهینامه‌ ها</h3>
+
+                    <div class="certificates-showcase">
+                        <div class="cert-card">
+                            <div class="cert-media">
+                                <img src="images/aplus.jpeg" alt="گواهینامه A+">
+                            </div>
+                            <div class="cert-details">
+                                <h4>گواهینامه تکنسین فنی کامپیوتر و +A | سازمان مدیریت صنعتی</h4>
+                            </div>
+                        </div>
+
+                        <div class="cert-card">
+                            <div class="cert-media">
+                                <img src="images/networkplus.jpeg" alt="گواهینامه Network+">
+                            </div>
+                            <div class="cert-details">
+                                <h4>گواهینامه +Network | سازمان مدیریت صنعتی</h4>
+                            </div>
+                        </div>
+
+                        <div class="cert-card">
+                            <div class="cert-media">
+                                <img src="images/winlive.jpeg" alt="گواهینامه Windows Live">
+                            </div>
+                            <div class="cert-details">
+                                <h4>گواهینامه آشنایی با Windows Live | فرادرس</h4>
+                            </div>
+                        </div>
+
+                        <div class="cert-card">
+                            <div class="cert-media">
+                                <img src="images/cs50cysec.jpeg" alt="گواهینامه CS50 Cybersecurity">
+                            </div>
+                            <div class="cert-details">
+                                <h4>گواهینامه امنیت سایبری CS50 | دانشگاه هاروارد</h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <details class="interactive-panel skills-accordion" close>
+                    <summary class="panel-title">
+                        مهارت ها
+                        <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </summary>
+
+                    <div class="skills-grid">
+                        <div class="skill-tag">ارتقای سخت افزاری کیس های کامپیوتر</div>
+                        <div class="skill-tag">عیب یابی سخت افزاری سطح اول کیس های کامپیوتر</div>
+                        <div class="skill-tag">سرویس و نگهداری دوره ای کیس های کامپیوتر</div>
+                        <div class="skill-tag">پیکربندی و میدیریت ویندوز</div>
+                        <div class="skill-tag">تجربه کار با Windows Live جهت عیب یابی و پشتیبانی سخت افزاری و نرم افزاری
+                        </div>
+                        <div class="skill-tag">آشنایی و تجربه کار با سیستم عامل لینوکس در سطح Linux Essentials</div>
+                        <div class="skill-tag">خدمات و پشتیبانی مقدماتی اکتیو و پسیو شبکه</div>
+                        <div class="skill-tag">درک مفاههم امنیت سایبری</div>
+                        <div class="skill-tag">کار با ابزار های کنترل نسخه Git و GitHub</div>
+                        <div class="skill-tag">حل مسئله</div>
+                        <div class="skill-tag">ارتباطات و روحیه کار تیمی</div>
+                        <div class="skill-tag">ایده پردازی</div>
+                    </div>
+                </details>
+
+                <section class="interactive-panel communication-hub">
+                    <h3 class="panel-title" style="margin-bottom: 15px;">راه های ارتباطی</h3>
+
+                    <div class="action-buttons-group">
+                        <a href="#" id="email" class="action-btn btn-email">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            ارسال ایمیل
+                        </a>
+
+                        <script>
+                            const element = document.getElementById("email");
+                            function revealEmail() {
+                                const user = "hsssalmani81";
+                                const domain = "gmail.com";
+                                element.href = "mailto:" + user + "@" + domain;
+                            }
+                            element.addEventListener("mouseover", revealEmail);
+                            element.addEventListener("touchstart", revealEmail);
+                        </script>
+
+                        <a href="https://t.me/cyberllloner" target="_blank" class="action-btn btn-telegram">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            پیام در تلگرام
+                        </a>
+                    </div>
+                </section>
+
+                <section class="interactive-panel">
+                    <h3 class="panel-title">لینک ها</h3>
+
+                    <div class="links-hub-grid">
+                        <a href="https://www.linkedin.com/in/hosein-salmani" target="_blank" class="link-card-btn">
+                            <span class="link-title">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                    </path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                                پروفایل لینکدین
+                            </span>
+                            <span class="link-badge">مشاهده پروفایل</span>
+                        </a>
+
+                        <a href="https://github.com/cyberllloner" target="_blank" class="link-card-btn">
+                            <span class="link-title">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                    </path>
+                                </svg>
+                                پروفایل گیت هاب
+                            </span>
+                            <span class="link-badge">مشاهده پروفایل</span>
+                        </a>
+                    </div>
+                </section>
+
+            </main>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

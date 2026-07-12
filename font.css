@@ -1,0 +1,37 @@
+/* ۱. تعریف فونت متغیر وزیرمتن */
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('fonts/webfonts/Vazirmatn[wght].woff2') format('woff2 supports variations'),
+       url('fonts/webfonts/Vazirmatn[wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ۲. اعمال فونت روی کل اجزای پورتفولیو */
+* {
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ۳. تنظیم ضخامت‌های استاندارد برای بخش‌های مختلف پورتفولیو */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700; /* کاملاً بولد برای عناوین پروژه‌ها و بخش‌ها */
+}
+
+p, span, li, a {
+  font-weight: 400; /* وزن معمولی و خوانا برای توضیحات پروژه */
+}
+
+.hero-title {
+  font-weight: 900; /* خیلی بولد (Black) برای عنوان اصلی صفحه اول */
+}
+
+.job-title, .date {
+  font-weight: 300; /* کمی نازک برای موقعیت‌های شغلی یا تاریخ‌ها */
+}
