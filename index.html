@@ -4,590 +4,666 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رزومه حسین سلمانی</title>
+    <title>حسین سلمانی</title>
+    <meta name="description" content="حسین سلمانی — متخصص پشتیبانی IT، سخت‌افزار و شبکه.">
 
     <link rel="stylesheet" href="font.css">
 
     <style>
-        :root {
-            --color-pcb-deep: #0B1310;
-            --color-panel-jade: #0E2018;
-            --color-neon-circuit: #50C878;
-            --color-gold-pin: #D4AF37;
-
-            --text-light: #f3f4f6;
-            --text-gray: #a8b3ae;
-
-            --bg-filter: linear-gradient(rgba(11, 19, 16, 0.88), rgba(11, 19, 16, 0.94));
+        /* ==========================================================================
+           متغیرها — اتاق سرور تاریک، طیف آبی و یخی
+           ========================================================================== */
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
         }
 
+        :root {
+            /* مشکی عمیق */
+            --color-black: #000000;
+            --color-void: #020206;
+            --color-abyss: #04050a;
+            --color-deep: #070a12;
+            --color-surface: #0b0f18;
+
+            /* طیف آبی/یخی — چراغ‌های رک */
+            --ice-100: #e8f4ff;
+            --ice-200: #b8dcff;
+            --ice-300: #7ec4ff;
+            --ice-400: #4aa8ff;
+            --ice-500: #00e5ff;
+            --ice-600: #00b8d4;
+            --ice-700: #0096ff;
+            --ice-800: #2979ff;
+            --ice-900: #0051c4;
+
+            /* متن */
+            --text-primary: #ffffff;
+            --text-secondary: #b4c4d8;
+            --text-muted: #4a586c;
+
+            /* حاشیه‌ها */
+            --border-soft: rgba(126, 196, 255, 0.08);
+            --border-medium: rgba(126, 196, 255, 0.15);
+            --border-bright: rgba(0, 229, 255, 0.45);
+
+            /* گرادیان‌های آبی */
+            --gradient-blue: linear-gradient(90deg,
+                    #00e5ff, #2979ff, #00d4ff, #7ec4ff, #00e5ff);
+            --gradient-blue-conic: conic-gradient(from var(--angle),
+                    #00e5ff, #2979ff, #00b8d4, #7ec4ff, #00e5ff, #2979ff, #00e5ff);
+            --gradient-panel: linear-gradient(160deg,
+                    rgba(11, 15, 24, 0.88), rgba(4, 5, 10, 0.78));
+
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+            --blur-glass: blur(22px);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 36px;
+        }
+
+        /* ==========================================================================
+           Reset
+           ========================================================================== */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Vazirmatn', sans-serif;
+        }
+
+        html {
             scroll-behavior: smooth;
         }
 
         body {
-            color: var(--text-light);
-            line-height: 1.9;
+            color: var(--text-primary);
+            background: var(--color-black);
+            line-height: 1.8;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
 
-            background-image: var(--bg-filter), url('images/bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        ::selection {
+            background: var(--ice-500);
+            color: var(--color-black);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--ice-500);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        section[id] {
+            scroll-margin-top: 90px;
         }
 
         /* ==========================================================================
-           بخش اول: پورتفولیو تعاملی و مینی‌مال (ایده دوم: ساختار متقاطع برد الکترونیکی)
+           لایه‌های پس‌زمینه — اتاق سرور تاریک
            ========================================================================== */
-        .hero-section {
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 6%;
-            position: relative;
-            border-bottom: 1px solid rgba(80, 200, 120, 0.1);
-            background: radial-gradient(circle at 10% 20%, rgba(80, 200, 120, 0.04), transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(214, 175, 55, 0.03), transparent 40%);
+
+        /* لایه ۱: هاله‌های آبی/یخی */
+        .aurora-bg {
+            position: fixed;
+            inset: -20%;
+            z-index: -5;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(0, 229, 255, 0.16), transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(41, 121, 255, 0.14), transparent 48%),
+                radial-gradient(circle at 50% 90%, rgba(0, 184, 212, 0.11), transparent 50%),
+                radial-gradient(circle at 92% 82%, rgba(126, 196, 255, 0.10), transparent 45%),
+                radial-gradient(circle at 8% 70%, rgba(0, 212, 255, 0.11), transparent 42%);
+            filter: blur(80px);
+            animation: bgPulse 24s ease-in-out infinite alternate;
+            will-change: transform, opacity;
         }
 
-        /* ساختار متقاطع و نامتقارن الهام گرفته از تصویر نمونه */
-        .asymmetric-layout {
-            max-width: 1100px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1.8fr;
-            gap: 60px;
-            align-items: center;
-            text-align: right;
-            margin-bottom: 60px;
+        @keyframes bgPulse {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.85;
+            }
+
+            50% {
+                transform: scale(1.08) rotate(3deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.03) rotate(-2deg);
+                opacity: 0.92;
+            }
         }
 
-        .hero-visual-side {
-            display: flex;
-            justify-content: center;
-            position: relative;
+        /* لایه ۲: چراغ‌های LED کناری — شبیه رک سرور */
+        .rack-leds {
+            position: fixed;
+            inset: 0;
+            z-index: -4;
+            pointer-events: none;
+            opacity: 0.55;
         }
 
-        /* فریم عکس مینی‌مال با خطوط راهنمای برد الکترونیکی */
-        .hero-profile-frame {
-            position: relative;
-            padding: 10px;
+        .rack-leds::before,
+        .rack-leds::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--ice-500);
+            box-shadow:
+                0 0 8px var(--ice-500),
+                0 0 16px rgba(0, 229, 255, 0.6),
+                0 55px 0 0 var(--ice-500),
+                0 55px 0 0 var(--ice-500),
+                0 130px 0 0 rgba(126, 196, 255, 0.9),
+                0 210px 0 0 var(--ice-500),
+                0 290px 0 0 rgba(41, 121, 255, 0.9),
+                0 390px 0 0 var(--ice-500),
+                0 490px 0 0 rgba(126, 196, 255, 0.8),
+                0 590px 0 0 var(--ice-500);
+            animation: ledBlink 3.2s steps(2, end) infinite;
+            will-change: opacity;
         }
 
-        .hero-profile-frame::before {
+        .rack-leds::before {
+            left: 2.5%;
+        }
+
+        .rack-leds::after {
+            right: 2.5%;
+            animation-delay: 1.6s;
+            animation-duration: 3.8s;
+        }
+
+        @keyframes ledBlink {
+
+            0%,
+            44%,
+            100% {
+                opacity: 0.35;
+            }
+
+            50%,
+            94% {
+                opacity: 1;
+            }
+        }
+
+        /* لایه ۳: خطوط عمودی رک */
+        .server-rack-lines {
+            position: fixed;
+            inset: 0;
+            z-index: -4;
+            pointer-events: none;
+            background-image: repeating-linear-gradient(90deg,
+                    transparent 0,
+                    transparent 139px,
+                    rgba(0, 229, 255, 0.035) 139px,
+                    rgba(0, 229, 255, 0.035) 140px);
+            mask-image: radial-gradient(ellipse at 50% 50%, black 25%, transparent 85%);
+            -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 25%, transparent 85%);
+            opacity: 0.7;
+        }
+
+        /* لایه ۴: پرتوی اسکنر */
+        .scan-beam {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .scan-beam::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 240px;
+            top: -240px;
+            background: linear-gradient(to bottom,
+                    transparent,
+                    rgba(0, 229, 255, 0.05),
+                    rgba(0, 229, 255, 0.11),
+                    rgba(0, 229, 255, 0.05),
+                    transparent);
+            filter: blur(16px);
+            animation: scanDown 14s ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes scanDown {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 1;
+            }
+
+            92% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(calc(100vh + 480px));
+                opacity: 0;
+            }
+        }
+
+        /* لایه ۵: شبکه‌ی نقطه‌چین آبی */
+        .grid-dots {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(0, 229, 255, 0.13) 1px, transparent 1px);
+            background-size: 36px 36px;
+            mask-image: radial-gradient(ellipse at 50% 35%, black 15%, transparent 72%);
+            -webkit-mask-image: radial-gradient(ellipse at 50% 35%, black 15%, transparent 72%);
+        }
+
+        /* لایه ۶: ذرات شناور آبی */
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .particles::before,
+        .particles::after {
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: 40px;
-            height: 40px;
-            border-top: 3px solid var(--color-neon-circuit);
-            border-right: 3px solid var(--color-neon-circuit);
+            left: 0;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: var(--ice-500);
+            box-shadow:
+                10vw 20vh 0 0 rgba(0, 229, 255, 0.7),
+                30vw 60vh 0 0 rgba(126, 196, 255, 0.5),
+                50vw 10vh 0 0 rgba(41, 121, 255, 0.6),
+                70vw 80vh 0 0 rgba(0, 229, 255, 0.6),
+                90vw 40vh 0 0 rgba(126, 196, 255, 0.5),
+                20vw 90vh 0 0 rgba(0, 229, 255, 0.5),
+                60vw 30vh 0 0 rgba(41, 121, 255, 0.4),
+                80vw 70vh 0 0 rgba(0, 229, 255, 0.6),
+                15vw 45vh 0 0 rgba(126, 196, 255, 0.5),
+                45vw 75vh 0 0 rgba(0, 229, 255, 0.5),
+                5vw 35vh 0 0 rgba(0, 184, 212, 0.5),
+                35vw 15vh 0 0 rgba(0, 229, 255, 0.4);
+            animation: particleDrift 45s linear infinite;
+            will-change: transform;
         }
 
-        .hero-profile-frame::after {
+        .particles::after {
+            box-shadow:
+                25vw 15vh 0 0 rgba(0, 229, 255, 0.6),
+                55vw 50vh 0 0 rgba(41, 121, 255, 0.5),
+                75vw 25vh 0 0 rgba(0, 229, 255, 0.7),
+                5vw 70vh 0 0 rgba(126, 196, 255, 0.6),
+                95vw 60vh 0 0 rgba(0, 229, 255, 0.4),
+                35vw 85vh 0 0 rgba(41, 121, 255, 0.5),
+                65vw 90vh 0 0 rgba(0, 229, 255, 0.6),
+                85vw 5vh 0 0 rgba(126, 196, 255, 0.5),
+                12vw 58vh 0 0 rgba(0, 229, 255, 0.5);
+            animation: particleDrift 60s linear infinite reverse;
+        }
+
+        @keyframes particleDrift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-2.5vw, -4vh);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        /* لایه ۷: گرین سینمایی */
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.055;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ==========================================================================
+           نوار پیشرفت
+           ========================================================================== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--gradient-blue);
+            background-size: 300% auto;
+            z-index: 1000;
+            box-shadow:
+                0 0 10px rgba(0, 229, 255, 0.7),
+                0 0 22px rgba(0, 229, 255, 0.4),
+                0 0 40px rgba(41, 121, 255, 0.25);
+            animation: gradientPan 10s linear infinite;
+            transition: width 0.1s linear;
+        }
+
+        @keyframes gradientPan {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+        /* ==========================================================================
+           ناوبری
+           ========================================================================== */
+        .site-nav {
+            position: fixed;
+            top: 16px;
+            right: 50%;
+            transform: translateX(50%);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 10px 14px 10px 20px;
+            background: rgba(4, 5, 10, 0.85);
+            backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
+            border: 1px solid var(--border-soft);
+            border-radius: 999px;
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.85),
+                0 0 30px rgba(0, 229, 255, 0.06),
+                inset 0 1px 1px rgba(255, 255, 255, 0.04);
+            width: max-content;
+            max-width: calc(100% - 32px);
+        }
+
+        .site-nav::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 40px;
-            border-bottom: 3px solid var(--color-gold-pin);
-            border-left: 3px solid var(--color-gold-pin);
+            top: -1px;
+            left: 20%;
+            right: 20%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.5), transparent);
+            border-radius: 1px;
         }
 
-        .hero-image {
-            width: 220px;
-            height: 220px;
-            border-radius: 4px;
-            object-fit: cover;
-            background: var(--color-pcb-deep);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            filter: grayscale(20%);
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        .nav-brand-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--ice-500);
+            box-shadow:
+                0 0 0 3px rgba(0, 229, 255, 0.15),
+                0 0 12px rgba(0, 229, 255, 0.9);
+            animation: dotPulse 2.8s ease-in-out infinite;
+            will-change: box-shadow;
+        }
+
+        @keyframes dotPulse {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 0 3px rgba(0, 229, 255, 0.15),
+                    0 0 12px rgba(0, 229, 255, 0.9);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 0 6px rgba(0, 229, 255, 0.05),
+                    0 0 22px rgba(0, 229, 255, 1);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .nav-link {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-radius: 999px;
+            transition: all 0.35s var(--easing);
+        }
+
+        .nav-link:hover,
+        .nav-link:focus-visible {
+            color: var(--ice-100);
+            background: rgba(0, 229, 255, 0.06);
+            text-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--color-black);
+            background: var(--ice-100);
+            border-radius: 999px;
+            transition: all 0.35s var(--easing);
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: #ffffff;
+            transform: translateY(-1px);
+            box-shadow:
+                0 8px 24px rgba(255, 255, 255, 0.15),
+                0 0 30px rgba(0, 229, 255, 0.4),
+                0 0 60px rgba(41, 121, 255, 0.25);
+        }
+
+        /* ==========================================================================
+           Hero
+           ========================================================================== */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 6% 80px;
+            width: 100%;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1120px;
+            width: 100%;
         }
 
         .hero-text-side {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-        }
-
-        .hero-text-side h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: -1px;
-        }
-
-        .hero-text-side h2 {
-            font-size: 1.4rem;
-            color: var(--color-neon-circuit);
-            font-weight: 700;
-        }
-
-        .hero-text-side p {
-            font-size: 1.05rem;
-            color: var(--text-gray);
-            max-width: 650px;
-            line-height: 1.8;
-        }
-
-        /* دکمه دانلود رزومه (PDF) هماهنگ با تم */
-        .btn-download-resume {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            font-size: 0.95rem;
-            background: transparent;
-            color: var(--color-gold-pin);
-            border: 1px solid var(--color-gold-pin);
-            border-radius: 12px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            width: fit-content;
-        }
-
-        .btn-download-resume:hover {
-            background: rgba(214, 175, 55, 0.08);
-            box-shadow: 0 0 15px rgba(214, 175, 55, 0.15);
-            transform: translateY(-1px);
-        }
-
-        /* بخش آمار عددی یکپارچه و مینی‌مال */
-        .hero-stats-container {
-            display: flex;
-            gap: 30px;
-            margin-top: 15px;
-            border-top: 1px solid rgba(80, 200, 120, 0.12);
-            padding-top: 15px;
-        }
-
-        .stat-box {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-box:not(:first-child) {
-            border-right: 1px solid rgba(80, 200, 120, 0.12);
-            padding-right: 30px;
-        }
-
-        .stat-box .stat-num {
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: var(--text-light);
-        }
-
-        .stat-box .stat-num.highlight {
-            color: var(--color-gold-pin);
-        }
-
-        .stat-box .stat-desc {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-            margin: 0;
-        }
-
-        /* کارت‌های تخصصی زیرین */
-        .tech-cards-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            max-width: 1100px;
-            width: 100%;
-            margin-bottom: 50px;
-        }
-
-        .tech-card {
-            background: rgba(14, 32, 24, 0.45);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(80, 200, 120, 0.12);
-            border-radius: 20px;
-            padding: 30px 24px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 18px;
             text-align: right;
         }
 
-        .tech-card:hover {
-            border-color: var(--color-neon-circuit);
-            transform: translateY(-5px);
-            background: rgba(14, 32, 24, 0.7);
-            box-shadow: 0 20px 40px rgba(80, 200, 120, 0.05);
-        }
-
-        .tech-card .icon-holder {
-            color: var(--color-gold-pin);
-            margin-bottom: 15px;
-            display: flex;
-        }
-
-        .tech-card h3 {
-            font-size: 1.15rem;
-            color: #ffffff;
-            margin-bottom: 12px;
-            font-weight: 800;
-        }
-
-        .tech-card p {
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            line-height: 1.75;
-        }
-
-        /* دکمه اسکرول به پایین صفحه */
-        .scroll-down-btn {
-            position: absolute;
-            bottom: 25px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .scroll-down-btn:hover {
-            color: var(--color-neon-circuit);
-        }
-
-        .scroll-down-btn svg {
-            animation: arrowBounce 2s infinite;
-            color: var(--color-neon-circuit);
-        }
-
-        @keyframes arrowBounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-6px);
-            }
-
-            60% {
-                transform: translateY(-3px);
-            }
-        }
-
-        /* ==========================================================================
-           بخش دوم: ساختار اصلی رزومه (کاملاً دست‌نخورده مطابق فایل ارسالی شما)
-           ========================================================================== */
-        .resume-wrapper {
-            padding: 60px 6% 30px 6%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .portfolio-container {
-            max-width: 1250px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1.3fr;
-            gap: 50px;
-            align-items: start;
-            flex-grow: 1;
-        }
-
-        .sidebar-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            position: sticky;
-            top: 50px;
-        }
-
-        .interactive-panel {
-            background: rgba(14, 32, 24, 0.85);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(80, 200, 120, 0.2);
-            border-radius: 28px;
-            padding: 35px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.03);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @supports (backdrop-filter: blur(40px)) or (-webkit-backdrop-filter: blur(40px)) {
-            .interactive-panel {
-                background: rgba(14, 32, 24, 0.52);
-            }
-        }
-
-        .interactive-panel:hover {
-            border-color: var(--color-neon-circuit);
-            box-shadow: 0 50px 90px rgba(80, 200, 120, 0.12);
-        }
-
-        .hero-panel {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            justify-content: center;
-            height: fit-content;
-        }
-
-        .info-panel h3 {
-            font-size: 1.2rem;
-            color: var(--color-neon-circuit);
-            margin-bottom: 20px;
-            font-weight: 800;
-            border-bottom: 1px solid rgba(80, 200, 120, 0.15);
-            padding-bottom: 10px;
-        }
-
-        .info-list {
-            list-style: none;
-        }
-
-        .info-list li {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-
-        .info-list li:last-child {
-            margin-bottom: 0;
-        }
-
-        .info-list .label {
-            color: var(--text-gray);
-        }
-
-        .info-list .value {
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        .avatar-container {
+        .status-pill {
             position: relative;
-            margin-bottom: 35px;
-        }
-
-        .avatar-image {
-            width: 180px;
-            height: 180px;
-            border-radius: 28px;
-            border: 2px solid var(--color-gold-pin);
-            padding: 6px;
-            object-fit: cover;
-            background: var(--color-pcb-deep);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .interactive-panel:hover .avatar-image {
-            transform: scale(1.05);
-            border-color: var(--color-neon-circuit);
-        }
-
-        .hero-panel h1 {
-            font-size: 2.6rem;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
-
-        .hero-panel h2 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: var(--color-neon-circuit);
-            margin-bottom: 25px;
-        }
-
-        .hero-panel p {
-            color: var(--text-gray);
-            font-size: 1rem;
-            text-align: justify;
-        }
-
-        .content-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-        }
-
-        .panel-title {
-            font-size: 1.4rem;
-            color: var(--color-neon-circuit);
-            margin-bottom: 28px;
-            font-weight: 900;
-        }
-
-        .content-card {
-            background: rgba(80, 200, 120, 0.04);
-            border: 1px solid rgba(80, 200, 120, 0.12);
-            border-radius: 20px;
-            padding: 22px;
-            margin-bottom: 20px;
-        }
-
-        .content-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
+            display: inline-flex;
             align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
             gap: 10px;
-        }
-
-        .card-main-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .card-meta-time {
+            padding: 8px 16px;
             font-size: 0.85rem;
-            color: var(--color-gold-pin);
-            font-weight: bold;
-        }
-
-        .card-details-list {
-            list-style-position: inside;
-            color: var(--text-gray);
-            font-size: 0.95rem;
-        }
-
-        .card-details-list li {
-            margin-bottom: 6px;
-        }
-
-        .certificates-showcase {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .cert-card {
-            background: rgba(11, 19, 16, 0.6);
-            border: 1px solid rgba(80, 200, 120, 0.15);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-        }
-
-        .cert-media {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: var(--color-pcb-deep);
-            display: block;
-            overflow: hidden;
-        }
-
-        .cert-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .cert-details {
-            padding: 20px;
-            background: rgba(14, 32, 24, 0.98);
-            border-top: 1px solid rgba(80, 200, 120, 0.15);
-        }
-
-        .cert-details h4 {
-            font-size: 1.05rem;
-            color: #ffffff;
             font-weight: 700;
+            color: var(--ice-100);
+            background: rgba(4, 5, 10, 0.9);
+            border-radius: 999px;
+            width: fit-content;
+            overflow: hidden;
+            box-shadow:
+                0 0 20px rgba(0, 229, 255, 0.12),
+                inset 0 0 20px rgba(0, 229, 255, 0.04);
         }
 
-        .skills-accordion {
-            outline: none;
+        .status-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--gradient-blue-conic);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rgbRotate 10s linear infinite;
+            pointer-events: none;
         }
 
-        .skills-accordion summary {
+        @keyframes rgbRotate {
+            to {
+                --angle: 360deg;
+            }
+        }
+
+        .status-pill-dot {
+            position: relative;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--ice-500);
+            box-shadow:
+                0 0 8px rgba(0, 229, 255, 0.9),
+                0 0 16px rgba(0, 229, 255, 0.5);
+        }
+
+        .status-pill-dot::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1.5px solid var(--ice-500);
+            opacity: 0;
+            animation: pulseRing 2.8s ease-out infinite;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                opacity: 0.7;
+                transform: scale(0.6);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            color: #ffffff;
+            text-shadow:
+                0 0 30px rgba(0, 229, 255, 0.12),
+                0 0 60px rgba(41, 121, 255, 0.06);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            font-weight: 600;
+            color: var(--text-secondary);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            list-style: none;
-            margin-bottom: 0;
-            user-select: none;
-        }
-
-        .skills-accordion summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .skills-accordion[open] summary {
-            margin-bottom: 25px;
-            border-bottom: 1px dashed rgba(80, 200, 120, 0.3);
-            padding-bottom: 15px;
-        }
-
-        .accordion-icon {
-            transition: transform 0.3s ease;
-            color: var(--color-gold-pin);
-        }
-
-        .skills-accordion[open] .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
-        }
-
-        .skill-tag {
-            background: rgba(80, 200, 120, 0.06);
-            border: 1px solid rgba(80, 200, 120, 0.2);
-            padding: 12px 15px;
-            border-radius: 14px;
-            text-align: center;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #ffffff;
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: rgba(80, 200, 120, 0.15);
-            border-color: var(--color-neon-circuit);
-            color: var(--color-neon-circuit);
-            transform: scale(1.03);
-        }
-
-        .communication-hub {
-            text-align: center;
-        }
-
-        .action-buttons-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin-top: 25px;
+        }
+
+        .hero-subtitle-accent {
+            background: var(--gradient-blue);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            animation: gradientPan 8s linear infinite;
+            filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.35));
+        }
+
+        .hero-subtitle-divider {
+            color: var(--text-muted);
+        }
+
+        .hero-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .hero-bio {
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            max-width: 460px;
+            line-height: 1.85;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 4px;
         }
 
         .action-btn {
@@ -595,229 +671,960 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 15px 32px;
-            border-radius: 16px;
-            font-weight: 900;
-            text-decoration: none;
-            font-size: 1.05rem;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            min-width: 210px;
+            padding: 13px 26px;
+            font-size: 0.92rem;
+            font-weight: 800;
+            border-radius: var(--radius-sm);
+            transition: all 0.35s var(--easing);
+            cursor: pointer;
+            border: 1px solid transparent;
+            white-space: nowrap;
         }
 
-        .btn-email {
-            background: var(--color-gold-pin);
-            color: #000000;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        .action-btn--primary {
+            background: var(--ice-100);
+            color: var(--color-black);
+            box-shadow: 0 0 24px rgba(0, 229, 255, 0.15);
         }
 
-        .btn-email:hover {
-            background: #e5be49;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        .action-btn--primary:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow:
+                0 12px 30px rgba(255, 255, 255, 0.15),
+                0 0 40px rgba(0, 229, 255, 0.4),
+                0 0 80px rgba(41, 121, 255, 0.25);
         }
 
-        .btn-telegram {
+        .action-btn--ghost {
             background: transparent;
-            color: var(--color-neon-circuit);
-            border: 2px solid var(--color-neon-circuit);
-            box-shadow: 0 10px 30px rgba(80, 200, 120, 0.05);
+            color: var(--ice-100);
+            border-color: var(--border-medium);
         }
 
-        .btn-telegram:hover {
-            background: var(--color-neon-circuit);
-            color: #000000;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(80, 200, 120, 0.3);
+        .action-btn--ghost:hover {
+            border-color: var(--ice-500);
+            color: var(--ice-500);
+            transform: translateY(-2px);
+            background: rgba(0, 229, 255, 0.04);
+            box-shadow:
+                0 0 24px rgba(0, 229, 255, 0.2),
+                inset 0 0 20px rgba(0, 229, 255, 0.04);
         }
 
-        .links-hub-grid {
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-soft);
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            margin-top: 5px;
+            gap: 4px;
         }
 
-        .link-card-btn {
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        .stat-value--gradient {
+            background: var(--gradient-blue);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientPan 8s linear infinite;
+            filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.4));
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* طرف تصویری */
+        .hero-visual-side {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background: rgba(80, 200, 120, 0.03);
-            border: 1px solid rgba(80, 200, 120, 0.15);
-            padding: 18px 24px;
-            border-radius: 18px;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
         }
 
-        .link-card-btn:hover {
-            background: rgba(80, 200, 120, 0.09);
-            border-color: var(--color-neon-circuit);
-            transform: translateX(-5px);
-            box-shadow: 0 10px 25px rgba(80, 200, 120, 0.06);
+        .hero-profile-frame {
+            position: relative;
+            width: clamp(240px, 26vw, 320px);
+            aspect-ratio: 1;
+            padding: 3px;
+            border-radius: var(--radius-xl);
+            background:
+                linear-gradient(#000000, #000000) padding-box,
+                var(--gradient-blue-conic) border-box;
+            border: 3px solid transparent;
+            animation:
+                rgbRotate 16s linear infinite,
+                profileGlow 5s ease-in-out infinite;
+            will-change: transform, box-shadow;
         }
 
-        .link-title {
+        @keyframes profileGlow {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 30px 80px rgba(0, 0, 0, 0.9),
+                    0 0 40px rgba(0, 229, 255, 0.18),
+                    0 0 80px rgba(41, 121, 255, 0.1);
+            }
+
+            50% {
+                box-shadow:
+                    0 30px 80px rgba(0, 0, 0, 0.9),
+                    0 0 70px rgba(0, 229, 255, 0.42),
+                    0 0 140px rgba(41, 121, 255, 0.22);
+            }
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            border-radius: calc(var(--radius-xl) - 3px);
+            object-fit: cover;
+            filter: brightness(1.02) contrast(1.05) saturate(1.02);
+        }
+
+        .hero-profile-halo {
+            position: absolute;
+            inset: -30px;
+            border-radius: calc(var(--radius-xl) + 30px);
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.22), transparent 65%);
+            filter: blur(45px);
+            z-index: -1;
+            animation: haloPulse 6s ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes haloPulse {
+
+            0%,
+            100% {
+                opacity: 0.55;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.06);
+            }
+        }
+
+        .hero-orbit {
+            position: absolute;
+            inset: -34px;
+            border-radius: calc(var(--radius-xl) + 34px);
+            border: 1px dashed rgba(126, 196, 255, 0.1);
+            animation: ringRotateSlow 70s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes ringRotateSlow {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero-orbit-dot {
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--ice-500);
+            box-shadow:
+                0 0 12px var(--ice-500),
+                0 0 24px rgba(0, 229, 255, 0.6);
+        }
+
+        /* ==========================================================================
+           سربرگ بخش‌ها
+           ========================================================================== */
+        .content-wrapper {
+            width: 100%;
+            padding: 70px 6%;
             display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .content-container {
+            max-width: 1120px;
+            width: 100%;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 36px;
+            max-width: 620px;
+        }
+
+        .section-eyebrow {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.05rem;
+            gap: 8px;
+            font-size: 0.76rem;
             font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .section-eyebrow-line {
+            width: 28px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--gradient-blue);
+            background-size: 300% auto;
+            animation: gradientPan 6s linear infinite;
+            box-shadow:
+                0 0 10px rgba(0, 229, 255, 0.7),
+                0 0 22px rgba(0, 229, 255, 0.35);
+        }
+
+        .section-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 900;
+            letter-spacing: -0.8px;
+            line-height: 1.2;
+            color: #ffffff;
+            text-shadow:
+                0 0 20px rgba(0, 229, 255, 0.12),
+                0 0 40px rgba(41, 121, 255, 0.06);
+        }
+
+        /* ==========================================================================
+           تخصص — ۳ باکس، وسط‌چین، نئون آبی
+           ========================================================================== */
+        #expertise .section-header {
+            align-items: center;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .expertise-card {
+            position: relative;
+            padding: 32px 26px;
+            background: var(--gradient-panel);
+            backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            gap: 14px;
+            min-height: 200px;
+            transition: all 0.55s var(--easing);
+            overflow: hidden;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: var(--gradient-blue-conic);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rgbRotate 14s linear infinite;
+            opacity: 0.5;
+            pointer-events: none;
+            transition: opacity 0.55s var(--easing);
+        }
+
+        .expertise-card:nth-child(2)::before {
+            animation-delay: -4.5s;
+        }
+
+        .expertise-card:nth-child(3)::before {
+            animation-delay: -9s;
+        }
+
+        .expertise-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 100%, rgba(0, 229, 255, 0.14), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.55s var(--easing);
+            pointer-events: none;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 24px 50px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(0, 229, 255, 0.18),
+                0 0 80px rgba(41, 121, 255, 0.1);
+        }
+
+        .expertise-card:hover::before {
+            opacity: 1;
+        }
+
+        .expertise-card:hover::after {
+            opacity: 1;
+        }
+
+        .expertise-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 229, 255, 0.05);
+            border: 1px solid rgba(126, 196, 255, 0.15);
+            color: var(--ice-300);
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.08);
+            transition: all 0.55s var(--easing);
+        }
+
+        .expertise-card:hover .expertise-icon {
+            color: var(--ice-500);
+            box-shadow:
+                0 0 20px rgba(0, 229, 255, 0.35),
+                inset 0 0 20px rgba(0, 229, 255, 0.1);
+            border-color: rgba(0, 229, 255, 0.5);
+        }
+
+        .expertise-title {
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .expertise-sub {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* ==========================================================================
+           مسیر
+           ========================================================================== */
+        .journey-list {
+            display: flex;
+            flex-direction: column;
+            background: var(--gradient-panel);
+            backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.04);
+        }
+
+        .journey-row {
+            display: grid;
+            grid-template-columns: 20px 1fr auto;
+            gap: 16px;
+            align-items: center;
+            padding: 18px 24px;
+            border-bottom: 1px solid rgba(126, 196, 255, 0.05);
+            transition: background 0.35s var(--easing);
+        }
+
+        .journey-row:last-child {
+            border-bottom: none;
+        }
+
+        .journey-row:hover {
+            background: rgba(0, 229, 255, 0.03);
+        }
+
+        .journey-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            box-shadow: 0 0 0 3px rgba(126, 196, 255, 0.06);
+            justify-self: center;
+        }
+
+        .journey-row--active {
+            background: linear-gradient(90deg, rgba(0, 229, 255, 0.04), transparent);
+        }
+
+        .journey-row--active .journey-dot {
+            background: var(--ice-500);
+            animation: dotPulse 2.5s ease-in-out infinite;
+            will-change: box-shadow;
+        }
+
+        .journey-info {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .journey-role {
+            font-size: 0.98rem;
+            font-weight: 800;
             color: #ffffff;
         }
 
-        .link-badge {
+        .journey-context {
             font-size: 0.85rem;
-            font-weight: bold;
-            color: var(--color-gold-pin);
-            background: rgba(214, 175, 55, 0.08);
-            padding: 4px 14px;
-            border-radius: 10px;
-            border: 1px solid rgba(214, 175, 55, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .link-card-btn:hover .link-badge {
-            color: #000000;
-            background: var(--color-gold-pin);
-            border-color: var(--color-gold-pin);
-        }
-
-        .site-footer {
-            width: 100%;
-            max-width: 1250px;
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(80, 200, 120, 0.15);
-            color: var(--text-gray);
-            font-size: 0.9rem;
+            color: var(--text-muted);
             font-weight: 500;
         }
 
-        .site-footer span {
-            color: var(--color-neon-circuit);
+        .journey-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 600;
         }
 
-        /* ---------- اصلاحات پاسخگویی (Responsive) ---------- */
-        @media (max-width: 950px) {
-            .asymmetric-layout {
+        .journey-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: rgba(126, 196, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-soft);
+            white-space: nowrap;
+        }
+
+        .journey-badge--gold {
+            background: rgba(0, 229, 255, 0.08);
+            color: var(--ice-500);
+            border-color: rgba(0, 229, 255, 0.35);
+            box-shadow:
+                0 0 15px rgba(0, 229, 255, 0.25),
+                inset 0 0 10px rgba(0, 229, 255, 0.05);
+        }
+
+        /* ==========================================================================
+           مهارت‌ها
+           ========================================================================== */
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: rgba(126, 196, 255, 0.03);
+            border: 1px solid var(--border-soft);
+            border-radius: 999px;
+            transition: all 0.4s var(--easing);
+        }
+
+        .skill-tag:hover {
+            border-color: var(--border-bright);
+            background: rgba(0, 229, 255, 0.06);
+            transform: translateY(-2px);
+            color: var(--ice-100);
+            box-shadow:
+                0 0 20px rgba(0, 229, 255, 0.2),
+                inset 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+
+        .skill-tag-icon {
+            color: var(--ice-400);
+            display: flex;
+            transition: all 0.4s var(--easing);
+        }
+
+        .skill-tag:hover .skill-tag-icon {
+            color: var(--ice-500);
+            filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.8));
+        }
+
+        /* ==========================================================================
+           گواهینامه‌ها
+           ========================================================================== */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .cert-card {
+            position: relative;
+            background: var(--gradient-panel);
+            backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all 0.55s var(--easing);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cert-card:hover {
+            border-color: var(--border-medium);
+            transform: translateY(-4px);
+            box-shadow:
+                0 20px 45px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(0, 229, 255, 0.15),
+                0 0 80px rgba(41, 121, 255, 0.08);
+        }
+
+        .cert-media {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background: var(--color-abyss);
+        }
+
+        .cert-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s var(--easing);
+        }
+
+        .cert-card:hover .cert-media img {
+            transform: scale(1.05);
+        }
+
+        .cert-info {
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .cert-title {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .cert-issuer {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           تحصیلات
+           ========================================================================== */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .education-card {
+            padding: 22px 24px;
+            background: var(--gradient-panel);
+            backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-md);
+            transition: all 0.55s var(--easing);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .education-card:hover {
+            border-color: var(--border-medium);
+            transform: translateY(-3px);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.9),
+                0 0 30px rgba(0, 229, 255, 0.12);
+        }
+
+        .education-type {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--ice-300);
+            background: rgba(0, 229, 255, 0.05);
+            border: 1px solid rgba(126, 196, 255, 0.18);
+            border-radius: 999px;
+            padding: 2px 10px;
+            width: fit-content;
+            letter-spacing: 0.3px;
+        }
+
+        .education-degree {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.4;
+            margin-top: 4px;
+        }
+
+        .education-school {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .education-date {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* ==========================================================================
+           تماس
+           ========================================================================== */
+        .contact-card {
+            position: relative;
+            padding: 60px 32px;
+            background: var(--gradient-panel);
+            backdrop-filter: var(--blur-glass);
+            -webkit-backdrop-filter: var(--blur-glass);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(0, 229, 255, 0.05);
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.12), transparent 60%);
+            pointer-events: none;
+            animation: contactGlowR 7s ease-in-out infinite;
+        }
+
+        .contact-card::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(41, 121, 255, 0.1), transparent 60%);
+            pointer-events: none;
+            animation: contactGlowL 9s ease-in-out infinite;
+        }
+
+        @keyframes contactGlowR {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes contactGlowL {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .contact-title {
+            position: relative;
+            font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin-bottom: 26px;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+        }
+
+        .contact-actions {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .contact-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            border-radius: var(--radius-sm);
+            transition: all 0.35s var(--easing);
+            border: 1px solid transparent;
+        }
+
+        .contact-action--email {
+            background: var(--ice-100);
+            color: var(--color-black);
+            box-shadow: 0 0 24px rgba(0, 229, 255, 0.15);
+        }
+
+        .contact-action--email:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow:
+                0 12px 30px rgba(255, 255, 255, 0.15),
+                0 0 40px rgba(0, 229, 255, 0.4),
+                0 0 80px rgba(41, 121, 255, 0.25);
+        }
+
+        .contact-action--outline {
+            background: transparent;
+            color: var(--ice-100);
+            border-color: var(--border-medium);
+        }
+
+        .contact-action--outline:hover {
+            border-color: var(--ice-500);
+            color: var(--ice-500);
+            transform: translateY(-2px);
+            background: rgba(0, 229, 255, 0.04);
+            box-shadow:
+                0 0 24px rgba(0, 229, 255, 0.25),
+                inset 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+
+        /* ==========================================================================
+           فوتر
+           ========================================================================== */
+        .site-footer {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 30px 6%;
+            border-top: 1px solid var(--border-soft);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .footer-text span {
+            background: var(--gradient-blue);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            animation: gradientPan 6s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.5));
+        }
+
+        .footer-link {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            transition: all 0.3s var(--easing);
+        }
+
+        .footer-link:hover {
+            color: var(--ice-500);
+            text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+        }
+
+        /* ==========================================================================
+           Reveal
+           ========================================================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition:
+                opacity 0.9s var(--easing),
+                transform 0.9s var(--easing);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           ریسپانسیو
+           ========================================================================== */
+        @media (max-width: 900px) {
+            .hero-layout {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 40px;
                 text-align: center;
             }
 
             .hero-text-side {
                 align-items: center;
-            }
-
-            .hero-image {
-                width: 170px;
-                height: 170px;
-            }
-
-            .tech-cards-row {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                padding: 0 5%;
-            }
-
-            .tech-card {
                 text-align: center;
+                order: 2;
             }
 
-            .tech-card .icon-holder {
+            .hero-visual-side {
+                order: 1;
+            }
+
+            .hero-bio {
+                margin: 0 auto;
+            }
+
+            .hero-actions {
                 justify-content: center;
             }
 
-            .resume-wrapper {
-                padding: 40px 5% 30px 5%;
+            .hero-stats {
+                justify-content: center;
             }
 
-            .portfolio-container {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .content-flow {
-                gap: 30px;
-            }
-
-            .sidebar-flow {
-                position: static;
-            }
-
-            .hero-panel h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero-panel h2 {
-                font-size: 1.1rem;
-            }
-
-            .avatar-image {
-                width: 140px;
-                height: 140px;
-            }
-
-            .action-buttons-group {
-                flex-direction: column;
-                width: 100%;
-                gap: 15px;
-            }
-
-            .action-btn {
-                width: 100%;
-            }
-
-            .link-card-btn {
-                flex-direction: column;
-                gap: 15px;
+            .section-header {
+                margin-left: auto;
+                margin-right: auto;
                 text-align: center;
+                align-items: center;
             }
 
-            .link-title {
-                flex-direction: column;
+            .nav-links {
+                display: none;
+            }
+
+            .site-nav {
+                gap: 14px;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero-text-side h1 {
-                font-size: 2.2rem;
+        @media (max-width: 640px) {
+            .content-wrapper {
+                padding: 50px 5%;
             }
 
-            .hero-text-side h2 {
-                font-size: 1.1rem;
+            .hero-section {
+                padding: 110px 5% 60px;
             }
 
-            .interactive-panel {
-                padding: 22px !important;
-                border-radius: 22px;
+            .hero-stats {
+                gap: 22px;
             }
 
-            .hero-panel h1 {
-                font-size: 1.8rem;
+            .stat-value {
+                font-size: 1.3rem;
             }
 
-            .skills-grid {
-                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            .stat-label {
+                font-size: 0.75rem;
             }
 
-            .skill-tag {
-                font-size: 0.85rem;
-                padding: 10px;
+            .journey-row {
+                grid-template-columns: 16px 1fr auto;
+                gap: 12px;
+                padding: 14px 18px;
             }
 
-            .panel-title {
-                font-size: 1.2rem;
-            }
-
-            .card-header {
+            .journey-info {
                 flex-direction: column;
+                gap: 2px;
                 align-items: flex-start;
             }
 
-            .card-meta-time {
-                margin-top: 5px;
+            .skill-tag {
+                font-size: 0.82rem;
+                padding: 8px 14px;
+            }
+
+            .contact-card {
+                padding: 44px 22px;
+            }
+
+            .contact-actions {
+                flex-direction: column;
+            }
+
+            .contact-action {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .site-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cert-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+        }
+
+        @media (max-width: 380px) {
+            .journey-row {
+                grid-template-columns: 14px 1fr;
+                row-gap: 6px;
+            }
+
+            .journey-badge {
+                grid-column: 2;
+                justify-self: start;
+            }
+        }
+
+        /* دسترس‌پذیری */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
         }
     </style>
@@ -825,398 +1632,596 @@
 
 <body>
 
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="aurora-bg"></div>
+    <div class="rack-leds"></div>
+    <div class="server-rack-lines"></div>
+    <div class="scan-beam"></div>
+    <div class="grid-dots"></div>
+    <div class="particles"></div>
+    <div class="grain-overlay"></div>
+
+    <!-- =====================================================================
+         ناوبری
+         ===================================================================== -->
+    <nav class="site-nav">
+        <a href="#" class="nav-brand">
+            <span class="nav-brand-dot"></span>
+            حسین سلمانی
+        </a>
+
+        <div class="nav-links">
+            <a href="#expertise" class="nav-link">تخصص</a>
+            <a href="#journey" class="nav-link">مسیر</a>
+            <a href="#skills" class="nav-link">مهارت‌ها</a>
+            <a href="#certificates" class="nav-link">گواهینامه</a>
+            <a href="#education" class="nav-link">تحصیلات</a>
+            <a href="#connect" class="nav-link">ارتباط</a>
+        </div>
+
+        <a href="#" class="nav-cta js-email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            گفتگو
+        </a>
+    </nav>
+
+    <!-- =====================================================================
+         Hero
+         ===================================================================== -->
     <header class="hero-section">
-        <div class="asymmetric-layout">
+        <div class="hero-layout">
+
+            <div class="hero-text-side">
+                <div class="status-pill">
+                    <span class="status-pill-dot"></span>
+                    در حال کار
+                </div>
+
+                <h1 class="hero-title">حسین سلمانی</h1>
+
+                <div class="hero-subtitle">
+                    <span class="hero-subtitle-accent">متخصص پشتیبانی IT</span>
+                    <span class="hero-subtitle-divider">•</span>
+                    <span class="hero-location">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        ایران
+                    </span>
+                </div>
+
+                <p class="hero-bio">
+                    سخت‌افزار، ویندوز و شبکه — با تمرکز بر عیب‌یابی اصولی و یادگیری پیوسته.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#connect" class="action-btn action-btn--primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        بیایید گفتگو کنیم
+                    </a>
+
+                    <a href="#expertise" class="action-btn action-btn--ghost">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        حوزه‌های تخصصی
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-value stat-value--gradient">۲+</span>
+                        <span class="stat-label">سال تجربه</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">۵</span>
+                        <span class="stat-label">محیط کاری</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">۵</span>
+                        <span class="stat-label">گواهینامه</span>
+                    </div>
+                </div>
+            </div>
 
             <div class="hero-visual-side">
+                <div class="hero-orbit">
+                    <span class="hero-orbit-dot"></span>
+                </div>
+
                 <div class="hero-profile-frame">
+                    <div class="hero-profile-halo"></div>
                     <img src="images/profile.jpg" alt="حسین سلمانی" class="hero-image">
                 </div>
             </div>
 
-            <div class="hero-text-side">
-                <h1>حسین سلمانی</h1>
-                <h2>تکنسین پشتیبانی IT</h2>
-                <p style="margin-bottom: 20px;">تکنسین پشتیبانی فناوری اطلاعات با تمرکز بر عیب یابی کلاینت ها، اسمبل سخت
-                    افزار و
-                    آماده سازی سیستم عامل. مسلط به رفع اختلالات سمت کاربر و دارای درک مطلوب از مبانی شبکه؛ با انگیزه ی
-                    بالا جهت ورود به محیط های عملیاتی و توسعه ی تخصصی مسیر شغلی در حوزه سخت افزار و شبکه</p>
-
-                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap; margin-bottom: 10px;">
-                    <a href="#" download class="btn-download-resume">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 5px;">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        دانلود فایل رزومه (PDF)
-                    </a>
-                </div>
-
-                <div class="hero-stats-container">
-                    <div class="stat-box">
-                        <span class="stat-num">کمتر از ۱ سال</span>
-                        <span class="stat-desc">سابقه کاری</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-num highlight">۴ گواهینامه</span>
-                        <span class="stat-desc">تخصصی و معتبر</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-        <div class="tech-cards-row">
-            <div class="tech-card">
-                <div class="icon-holder">
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                </div>
-                <h3>کاربر و نرم افزار (Tier 1)</h3>
-                <p>پاسخگویی به تیکت‌ها، رفع خطاهای سیستم عامل، نصب و پیکربندی نرم‌افزار ها و راهنمایی کاربران برای حل
-                    مشکلات روزمره</p>
-            </div>
-
-            <div class="tech-card">
-                <div class="icon-holder">
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                        <rect x="9" y="9" width="6" height="6"></rect>
-                        <line x1="9" y1="1" x2="9" y2="4"></line>
-                        <line x1="15" y1="1" x2="15" y2="4"></line>
-                        <line x1="9" y1="20" x2="9" y2="23"></line>
-                        <line x1="15" y1="20" x2="15" y2="23"></line>
-                        <line x1="20" y1="9" x2="23" y2="9"></line>
-                        <line x1="20" y1="15" x2="23" y2="15"></line>
-                        <line x1="1" y1="9" x2="4" y2="9"></line>
-                        <line x1="1" y1="15" x2="4" y2="15"></line>
-                    </svg>
-                </div>
-                <h3>پشتیبانی سخت افزاری (Tier 2)</h3>
-                <p>عیب یابی فیزیکی کلاینت ها، ارتقا و اسمبل قطعات، تعویض تجهیزات و سرویس دوره ای کیس های کامپیوتر</p>
-            </div>
-
-            <div class="tech-card">
-                <div class="icon-holder">
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
-                </div>
-                <h3>شبکه و اشتیاق به توسعه آن</h3>
-                <p>تسلط بر مفاهیم و اصول پایه‌ای شبکه و کاربرد عملی آن در پشتیبانی سیستم‌ها؛ دارای انگیزه‌ای بالا جهت
-                    ورود به موقعیت‌های کاری این حوزه و توسعه تخصصی این مسیر</p>
-            </div>
-        </div>
-
-        <a href="#resume-section-start" class="scroll-down-btn">
-            <span>مشاهده جزئیات رزومه فنی</span>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <polyline points="19 12 12 19 5 12"></polyline>
-            </svg>
-        </a>
     </header>
 
-    <div id="resume-section-start"></div>
-
-    <div class="resume-wrapper">
-        <div class="portfolio-container">
-
-            <div class="sidebar-flow">
-                <aside class="interactive-panel hero-panel">
-                    <div class="avatar-container">
-                        <img src="images/profile.jpg" alt="حسین سلمانی" class="avatar-image">
-                    </div>
-                    <h1>حسین سلمانی</h1>
-                    <h2>IT Support Technician</h2>
-                    <p>تکنسین پشتیبانی فناوری اطلاعات با تمرکز بر عیب یابی کلاینت ها، اسمبل سخت افزار و آماده سازی سیستم
-                        عامل. مسلط به رفع اختلالات سمت کاربر و دارای درک مطلوب از مبانی شبکه؛ با انگیزه ی بالا جهت ورود
-                        به محیط های عملیاتی و توسعه ی تخصصی مسیر شغلی در حوزه سخت افزار و شبکه</p>
-                </aside>
-
-                <aside class="interactive-panel info-panel">
-                    <h3>اطلاعات پایه</h3>
-                    <ul class="info-list">
-                        <li>
-                            <span class="label">تاریخ تولد:</span>
-                            <span class="value">۱۳۸۱</span>
-                        </li>
-                        <li>
-                            <span class="label">محل سکونت:</span>
-                            <span class="value">شیراز</span>
-                        </li>
-                        <li>
-                            <span class="label">وضعیت نظام وظیفه:</span>
-                            <span class="value">مشمول</span>
-                        </li>
-                    </ul>
-                </aside>
+    <!-- =====================================================================
+         تخصص
+         ===================================================================== -->
+    <section class="content-wrapper" id="expertise">
+        <div class="content-container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">
+                    <span class="section-eyebrow-line"></span>
+                    حوزه‌های تخصصی
+                </span>
+                <h2 class="section-title">آنچه انجام می‌دهم</h2>
             </div>
 
-            <main class="content-flow">
-
-                <section class="interactive-panel">
-                    <h3 class="panel-title">سوابق کاری</h3>
-
-                    <div class="content-card">
-                        <div class="card-header">
-                            <span class="card-main-title">IT Support Technician | رایانه پویای حافظ</span>
-                            <span class="card-meta-time">مرداد ۱۴۰۵ - تاکنون</span>
-                        </div>
-                        <ul class="card-details-list">
-                            <li>ارتقا سخت افزاری سیستم ها</li>
-                            <li>عیب یابی و حل مشکلات سخت افزاری و نرم افزاری کاربران</li>
-                            <li>نصب و پیکربندی سیستم عامل ویندوز و نرم‌افزار ها</li>
-                            <li>انجام تسک های سبک پسیو شبکه</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-header">
-                            <span class="card-main-title">Desktop Support Technician | علوم پزشکی شیراز</span>
-                            <span class="card-meta-time">مهر ۱۴۰۴ - آذر ۱۴۰۴</span>
-                        </div>
-                        <ul class="card-details-list">
-                            <li>(همکاری بعنوان کارآموز)</li>
-                            <li>ارتقا سخت افزاری سیستم ها</li>
-                            <li>عیب یابی و حل مشکلات سخت افزاری و نرم افزاری پایه ای کاربران</li>
-                            <li>نصب و پیکربندی سیستم عامل ویندوز و نرم‌افزار ها</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-header">
-                            <span class="card-main-title">Linux SysAdmin | انتقال داده آریا سرو</span>
-                            <span class="card-meta-time">اردیبهشت ۱۴۰۳ - تیر ۱۴۰۳</span>
-                        </div>
-                        <ul class="card-details-list">
-                            <li>(همکاری بعنوان کارآموز)</li>
-                            <li>بکارگیری مبانی سیستم‌عامل گنو/لینوکس در انجام تسک ها</li>
-                            <li>بکارگیری مبانی شبکه و کسب تجربه عملی</li>
-                            <li>تجربه کار با سرویس های پایه</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-header">
-                            <span class="card-main-title">Linux SysAdmin | آرکان</span>
-                            <span class="card-meta-time">فروردین ۱۴۰۳ - اردیبهشت ۱۴۰۳</span>
-                        </div>
-                        <ul class="card-details-list">
-                            <li>(همکاری بعنوان کارآموز)</li>
-                            <li>یادگیری و بکارگیری مبانی سیستم‌عامل گنو/لینوکس در انجام تسک ها</li>
-                            <li>بکارگیری مبانی شبکه و کسب تجربه عملی</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-header">
-                            <span class="card-main-title">Desktop Support Technician | دانشگاه شهید باهنر شیراز</span>
-                            <span class="card-meta-time">خرداد ۱۴۰۲ - مرداد ۱۴۰۲</span>
-                        </div>
-                        <ul class="card-details-list">
-                            <li>(همکاری بعنوان کارآموز)</li>
-                            <li>انجام سرویس های اولیه سخت افزاری</li>
-                            <li>نصب و پیکربندی سیستم عامل ویندوز و نرم‌افزار ها</li>
-                        </ul>
-                    </div>
-
-                </section>
-
-                <section class="interactive-panel">
-                    <h3 class="panel-title">تحصیلات</h3>
-
-                    <div class="content-card">
-                        <div class="card-header">
-                            <span class="card-main-title">کارشناسی تکنولوژی نرم افزار</span>
-                            <span class="card-meta-time">بهمن ۱۴۰۲ - بهمن ۱۴۰۴</span>
-                        </div>
-                        <ul class="card-details-list">
-                            <li>موسسه آموزش عالی زند شیراز</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-header">
-                            <span class="card-main-title">کاردانی فناوری اطلاعات</span>
-                            <span class="card-meta-time">مهر ۱۴۰۰ - اسفند ۱۴۰۲</span>
-                        </div>
-                        <ul class="card-details-list">
-                            <li>دانشگاه ملی مهارت</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-header">
-                            <span class="card-main-title">دیپلم شبکه و نرم افزار</span>
-                            <span class="card-meta-time">شهریور ۱۴۰۰</span>
-                        </div>
-                        <ul class="card-details-list">
-                            <li>هنرستان فنی حرفه ای شهید مهدی خراجی</li>
-                        </ul>
-                    </div>
-
-                </section>
-
-                <section class="interactive-panel">
-                    <h3 class="panel-title">مدارک و گواهینامه‌ ها</h3>
-
-                    <div class="certificates-showcase">
-                        <div class="cert-card">
-                            <div class="cert-media">
-                                <img src="images/aplus.jpeg" alt="گواهینامه A+">
-                            </div>
-                            <div class="cert-details">
-                                <h4>گواهینامه تکنسین فنی کامپیوتر و +A | سازمان مدیریت صنعتی</h4>
-                            </div>
-                        </div>
-
-                        <div class="cert-card">
-                            <div class="cert-media">
-                                <img src="images/networkplus.jpeg" alt="گواهینامه Network+">
-                            </div>
-                            <div class="cert-details">
-                                <h4>گواهینامه +Network | سازمان مدیریت صنعتی</h4>
-                            </div>
-                        </div>
-
-                        <div class="cert-card">
-                            <div class="cert-media">
-                                <img src="images/winlive.jpeg" alt="گواهینامه Windows Live">
-                            </div>
-                            <div class="cert-details">
-                                <h4>گواهینامه آشنایی با Windows Live | فرادرس</h4>
-                            </div>
-                        </div>
-
-                        <div class="cert-card">
-                            <div class="cert-media">
-                                <img src="images/cs50cysec.jpeg" alt="گواهینامه CS50 Cybersecurity">
-                            </div>
-                            <div class="cert-details">
-                                <h4>گواهینامه امنیت سایبری CS50 | دانشگاه هاروارد</h4>
-                            </div>
-                        </div>
-
-                        <div class="cert-card">
-                            <div class="cert-media">
-                                <img src="images/MD-100.png" alt="گواهینامه MD-100">
-                            </div>
-                            <div class="cert-details">
-                                <h4>گواهینامه MD-100 Install the Windows client | مایکروسافت</h4>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <details class="interactive-panel skills-accordion" close>
-                    <summary class="panel-title">
-                        مهارت ها
-                        <svg class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
+            <div class="expertise-grid">
+                <article class="expertise-card reveal">
+                    <div class="expertise-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                         </svg>
-                    </summary>
-
-                    <div class="skills-grid">
-                        <div class="skill-tag">ارتقای سخت افزاری کیس های کامپیوتر</div>
-                        <div class="skill-tag">پشتیبانی سخت افزاری و نرم افزاری سطح اول و سطح دوم</div>
-                        <div class="skill-tag">سرویس و نگهداری دوره ای کیس های کامپیوتر</div>
-                        <div class="skill-tag">پیکربندی و میدیریت ویندوز</div>
-                        <div class="skill-tag">تجربه کار با Windows Live جهت عیب یابی و پشتیبانی سخت افزاری و نرم افزاری
-                        </div>
-                        <div class="skill-tag">آشنایی و تجربه کار با سیستم عامل لینوکس در سطح Linux Essentials</div>
-                        <div class="skill-tag">درک مفاهیم شبکه</div>
-                        <div class="skill-tag">درک مفاههم امنیت سایبری</div>
-                        <div class="skill-tag">کار با ابزار های کنترل نسخه Git و GitHub</div>
-                        <div class="skill-tag">حل مسئله</div>
-                        <div class="skill-tag">ارتباطات و روحیه کار تیمی</div>
-                        <div class="skill-tag">ایده پردازی</div>
-                        <div class="skill-tag">خلاقیت</div>
                     </div>
-                </details>
+                    <div class="expertise-sub">Tier 1</div>
+                    <h3 class="expertise-title">کاربر و نرم‌افزار</h3>
+                </article>
 
-                <section class="interactive-panel communication-hub">
-                    <h3 class="panel-title" style="margin-bottom: 15px;">راه های ارتباطی</h3>
-
-                    <div class="action-buttons-group">
-                        <a href="#" id="email" class="action-btn btn-email">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                </path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                            ارسال ایمیل
-                        </a>
-
-                        <script>
-                            const element = document.getElementById("email");
-                            function revealEmail() {
-                                const user = "hsssalmani81";
-                                const domain = "gmail.com";
-                                element.href = "mailto:" + user + "@" + domain;
-                            }
-                            element.addEventListener("mouseover", revealEmail);
-                            element.addEventListener("touchstart", revealEmail);
-                        </script>
-
-                        <a href="https://t.me/cyberllloner" target="_blank" class="action-btn btn-telegram">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <line x1="22" y1="2" x2="11" y2="13"></line>
-                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                            </svg>
-                            پیام در تلگرام
-                        </a>
+                <article class="expertise-card reveal">
+                    <div class="expertise-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                            <rect x="9" y="9" width="6" height="6"></rect>
+                            <line x1="9" y1="1" x2="9" y2="4"></line>
+                            <line x1="15" y1="1" x2="15" y2="4"></line>
+                            <line x1="9" y1="20" x2="9" y2="23"></line>
+                            <line x1="15" y1="20" x2="15" y2="23"></line>
+                            <line x1="20" y1="9" x2="23" y2="9"></line>
+                            <line x1="20" y1="15" x2="23" y2="15"></line>
+                            <line x1="1" y1="9" x2="4" y2="9"></line>
+                            <line x1="1" y1="15" x2="4" y2="15"></line>
+                        </svg>
                     </div>
-                </section>
+                    <div class="expertise-sub">Tier 2</div>
+                    <h3 class="expertise-title">پشتیبانی سخت‌افزاری</h3>
+                </article>
 
-                <section class="interactive-panel">
-                    <h3 class="panel-title">لینک ها</h3>
-
-                    <div class="links-hub-grid">
-                        <a href="https://www.linkedin.com/in/hosein-salmani" target="_blank" class="link-card-btn">
-                            <span class="link-title">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
-                                    </path>
-                                    <rect x="2" y="9" width="4" height="12"></rect>
-                                    <circle cx="4" cy="4" r="2"></circle>
-                                </svg>
-                                پروفایل لینکدین
-                            </span>
-                            <span class="link-badge">مشاهده پروفایل</span>
-                        </a>
-
-                        <a href="https://github.com/cyberllloner" target="_blank" class="link-card-btn">
-                            <span class="link-title">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path
-                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                    </path>
-                                </svg>
-                                پروفایل گیت هاب
-                            </span>
-                            <span class="link-badge">مشاهده پروفایل</span>
-                        </a>
+                <article class="expertise-card reveal">
+                    <div class="expertise-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="5" r="3"></circle>
+                            <circle cx="5" cy="19" r="3"></circle>
+                            <circle cx="19" cy="19" r="3"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="12" x2="6" y2="16"></line>
+                            <line x1="12" y1="12" x2="18" y2="16"></line>
+                        </svg>
                     </div>
-                </section>
-
-            </main>
-
+                    <div class="expertise-sub">Network</div>
+                    <h3 class="expertise-title">شبکه و زیرساخت</h3>
+                </article>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- =====================================================================
+         مسیر
+         ===================================================================== -->
+    <section class="content-wrapper" id="journey">
+        <div class="content-container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">
+                    <span class="section-eyebrow-line"></span>
+                    مسیر
+                </span>
+                <h2 class="section-title">سوابق کاری</h2>
+            </div>
+
+            <div class="journey-list reveal">
+                <div class="journey-row journey-row--active">
+                    <span class="journey-dot"></span>
+                    <div class="journey-info">
+                        <span class="journey-role">پشتیبانی IT</span>
+                        <span class="journey-context">خرده‌فروشی سخت‌افزار</span>
+                        <span class="journey-date">مرداد ۱۴۰۴ – اکنون</span>
+                    </div>
+                    <span class="journey-badge journey-badge--gold">در حال کار</span>
+                </div>
+
+                <div class="journey-row">
+                    <span class="journey-dot"></span>
+                    <div class="journey-info">
+                        <span class="journey-role">پشتیبانی دسکتاپ</span>
+                        <span class="journey-context">مرکز درمانی دانشگاهی</span>
+                        <span class="journey-date">مهر ۱۴۰۴ – آذر ۱۴۰۴</span>
+                    </div>
+                    <span class="journey-badge">کارآموزی</span>
+                </div>
+
+                <div class="journey-row">
+                    <span class="journey-dot"></span>
+                    <div class="journey-info">
+                        <span class="journey-role">مدیریت سیستم لینوکس</span>
+                        <span class="journey-context">شرکت زیرساخت داده</span>
+                        <span class="journey-date">اردیبهشت ۱۴۰۳ – تیر ۱۴۰۳</span>
+                    </div>
+                    <span class="journey-badge">کارآموزی</span>
+                </div>
+
+                <div class="journey-row">
+                    <span class="journey-dot"></span>
+                    <div class="journey-info">
+                        <span class="journey-role">مدیریت سیستم لینوکس</span>
+                        <span class="journey-context">شرکت فناوری اطلاعات</span>
+                        <span class="journey-date">فروردین ۱۴۰۳ – اردیبهشت ۱۴۰۳</span>
+                    </div>
+                    <span class="journey-badge">کارآموزی</span>
+                </div>
+
+                <div class="journey-row">
+                    <span class="journey-dot"></span>
+                    <div class="journey-info">
+                        <span class="journey-role">پشتیبانی دسکتاپ</span>
+                        <span class="journey-context">محیط دانشگاهی</span>
+                        <span class="journey-date">خرداد ۱۴۰۲ – مرداد ۱۴۰۲</span>
+                    </div>
+                    <span class="journey-badge">اولین تجربه</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         مهارت‌ها
+         ===================================================================== -->
+    <section class="content-wrapper" id="skills">
+        <div class="content-container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">
+                    <span class="section-eyebrow-line"></span>
+                    جعبه‌ابزار
+                </span>
+                <h2 class="section-title">مهارت‌ها</h2>
+            </div>
+
+            <div class="skills-tags reveal">
+                <span class="skill-tag">
+                    <span class="skill-tag-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                            <rect x="9" y="9" width="6" height="6"></rect>
+                        </svg>
+                    </span>
+                    سخت‌افزار
+                </span>
+
+                <span class="skill-tag">
+                    <span class="skill-tag-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </span>
+                    ویندوز
+                </span>
+
+                <span class="skill-tag">
+                    <span class="skill-tag-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="4 17 10 11 4 5"></polyline>
+                            <line x1="12" y1="19" x2="20" y2="19"></line>
+                        </svg>
+                    </span>
+                    لینوکس
+                </span>
+
+                <span class="skill-tag">
+                    <span class="skill-tag-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="5" r="2.5"></circle>
+                            <circle cx="5" cy="19" r="2.5"></circle>
+                            <circle cx="19" cy="19" r="2.5"></circle>
+                            <line x1="12" y1="7.5" x2="12" y2="12"></line>
+                            <line x1="12" y1="12" x2="6.5" y2="17"></line>
+                            <line x1="12" y1="12" x2="17.5" y2="17"></line>
+                        </svg>
+                    </span>
+                    شبکه
+                </span>
+
+                <span class="skill-tag">
+                    <span class="skill-tag-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </span>
+                    امنیت
+                </span>
+
+                <span class="skill-tag">
+                    <span class="skill-tag-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="6" cy="6" r="3"></circle>
+                            <circle cx="6" cy="18" r="3"></circle>
+                            <circle cx="18" cy="6" r="3"></circle>
+                            <line x1="6" y1="9" x2="6" y2="15"></line>
+                            <path d="M18 9a9 9 0 0 1-9 9"></path>
+                        </svg>
+                    </span>
+                    Git
+                </span>
+
+                <span class="skill-tag">
+                    <span class="skill-tag-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </span>
+                    کار تیمی
+                </span>
+
+                <span class="skill-tag">
+                    <span class="skill-tag-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </span>
+                    حل مسئله
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         گواهینامه‌ها
+         ===================================================================== -->
+    <section class="content-wrapper" id="certificates">
+        <div class="content-container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">
+                    <span class="section-eyebrow-line"></span>
+                    اعتبارنامه‌ها
+                </span>
+                <h2 class="section-title">گواهینامه‌ها</h2>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-card reveal">
+                    <div class="cert-media">
+                        <img src="images/aplus.jpeg" alt="گواهینامه +A" loading="lazy">
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-title">+A</span>
+                        <span class="cert-issuer">مدیریت صنعتی</span>
+                    </div>
+                </div>
+
+                <div class="cert-card reveal">
+                    <div class="cert-media">
+                        <img src="images/networkplus.jpeg" alt="گواهینامه +Network" loading="lazy">
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-title">+Network</span>
+                        <span class="cert-issuer">مدیریت صنعتی</span>
+                    </div>
+                </div>
+
+                <div class="cert-card reveal">
+                    <div class="cert-media">
+                        <img src="images/MD-100.png" alt="گواهینامه MD-100" loading="lazy">
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-title">MD-100</span>
+                        <span class="cert-issuer">Microsoft</span>
+                    </div>
+                </div>
+
+                <div class="cert-card reveal">
+                    <div class="cert-media">
+                        <img src="images/cs50cysec.jpeg" alt="گواهینامه CS50 Cybersecurity" loading="lazy">
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-title">CS50 Cybersecurity</span>
+                        <span class="cert-issuer">Harvard</span>
+                    </div>
+                </div>
+
+                <div class="cert-card reveal">
+                    <div class="cert-media">
+                        <img src="images/winlive.jpeg" alt="گواهینامه Windows Live" loading="lazy">
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-title">Windows Live</span>
+                        <span class="cert-issuer">فرادرس</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         تحصیلات
+         ===================================================================== -->
+    <section class="content-wrapper" id="education">
+        <div class="content-container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">
+                    <span class="section-eyebrow-line"></span>
+                    پیشینه‌ی آموزشی
+                </span>
+                <h2 class="section-title">تحصیلات</h2>
+            </div>
+
+            <div class="education-grid">
+                <div class="education-card reveal">
+                    <span class="education-type">کارشناسی</span>
+                    <h3 class="education-degree">تکنولوژی نرم‌افزار</h3>
+                    <p class="education-school">دانشگاه دولتی</p>
+                    <span class="education-date">بهمن ۱۴۰۲ – بهمن ۱۴۰۴</span>
+                </div>
+
+                <div class="education-card reveal">
+                    <span class="education-type">کاردانی</span>
+                    <h3 class="education-degree">فناوری اطلاعات</h3>
+                    <p class="education-school">دانشگاه فنی و حرفه‌ای</p>
+                    <span class="education-date">مهر ۱۴۰۰ – اسفند ۱۴۰۲</span>
+                </div>
+
+                <div class="education-card reveal">
+                    <span class="education-type">دیپلم</span>
+                    <h3 class="education-degree">شبکه و نرم‌افزار</h3>
+                    <p class="education-school">هنرستان فنی</p>
+                    <span class="education-date">شهریور ۱۴۰۰</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         تماس
+         ===================================================================== -->
+    <section class="content-wrapper" id="connect">
+        <div class="content-container">
+            <div class="contact-card reveal">
+                <h2 class="contact-title">بیایید گفتگو کنیم</h2>
+
+                <div class="contact-actions">
+                    <a href="#" class="contact-action contact-action--email js-email">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        ایمیل
+                    </a>
+
+                    <a href="https://t.me/cyberllloner" target="_blank" rel="noopener"
+                        class="contact-action contact-action--outline">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                        تلگرام
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/hosein-salmani" target="_blank" rel="noopener"
+                        class="contact-action contact-action--outline">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                        لینکدین
+                    </a>
+
+                    <a href="https://github.com/cyberllloner" target="_blank" rel="noopener"
+                        class="contact-action contact-action--outline">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                            </path>
+                        </svg>
+                        گیت‌هاب
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         فوتر
+         ===================================================================== -->
+    <footer class="site-footer">
+        <p class="footer-text">ساخته‌شده با <span>♥</span> — حسین سلمانی</p>
+        <a href="#" class="footer-link">بازگشت به بالا ↑</a>
+    </footer>
+
+    <script>
+        /* ---------------------------------------------------------------
+           نوار پیشرفت اسکرول
+           --------------------------------------------------------------- */
+        const scrollProgress = document.getElementById('scrollProgress');
+        const updateScrollProgress = () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
+            scrollProgress.style.width = scrolled + '%';
+        };
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+        updateScrollProgress();
+
+        /* ---------------------------------------------------------------
+           Reveal
+           --------------------------------------------------------------- */
+        const revealElements = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+            revealElements.forEach((el, index) => {
+                el.style.transitionDelay = (index % 3) * 0.06 + 's';
+                revealObserver.observe(el);
+            });
+        } else {
+            revealElements.forEach((el) => el.classList.add('is-visible'));
+        }
+
+        /* ---------------------------------------------------------------
+           محافظت از ایمیل
+           --------------------------------------------------------------- */
+        const emailLinks = document.querySelectorAll('.js-email');
+        let emailRevealed = false;
+
+        function revealEmail() {
+            if (emailRevealed) return;
+            const user = "hsssalmani81";
+            const domain = "gmail.com";
+            emailLinks.forEach((link) => {
+                link.href = "mailto:" + user + "@" + domain;
+            });
+            emailRevealed = true;
+        }
+
+        emailLinks.forEach((link) => {
+            link.addEventListener('mouseover', revealEmail);
+            link.addEventListener('touchstart', revealEmail, { passive: true });
+            link.addEventListener('focus', revealEmail);
+        });
+    </script>
 
 </body>
 
