@@ -11,7 +11,7 @@
 
     <style>
         /* ==========================================================================
-           Swiss Minimal — مشکی خالص + خاکستری + لیمو
+           RGB Flow — جریان رنگین کمانی خطی از چپ به راست
            ========================================================================== */
         @property --angle {
             syntax: '<angle>';
@@ -36,9 +36,25 @@
             --gray-800: #1a1a1a;
             --gray-900: #0d0d0d;
 
-            --lime: #d4ff00;
-            --lime-soft: #b8d900;
-            --lime-deep: #8aaa00;
+            /* پالت RGB */
+            --rgb-pink: #ff0080;
+            --rgb-orange: #ff8c00;
+            --rgb-yellow: #ffd93d;
+            --rgb-green: #00ff88;
+            --rgb-cyan: #00e5ff;
+            --rgb-blue: #2979ff;
+            --rgb-purple: #a033ff;
+
+            /* گرادیان RGB */
+            --rgb-gradient: linear-gradient(90deg,
+                    #ff0080 0%,
+                    #ff8c00 14%,
+                    #ffd93d 28%,
+                    #00ff88 42%,
+                    #00e5ff 56%,
+                    #2979ff 70%,
+                    #a033ff 84%,
+                    #ff0080 100%);
 
             --text-primary: #ffffff;
             --text-secondary: #a8a8a8;
@@ -46,9 +62,7 @@
 
             --border-soft: rgba(255, 255, 255, 0.08);
             --border-medium: rgba(255, 255, 255, 0.15);
-            --border-bright: rgba(212, 255, 0, 0.5);
 
-            --gradient-lime: linear-gradient(90deg, #d4ff00, #8aaa00, #d4ff00);
             --gradient-panel: linear-gradient(160deg, rgba(18, 18, 18, 0.92), rgba(5, 5, 5, 0.85));
 
             --easing: cubic-bezier(0.16, 1, 0.3, 1);
@@ -59,9 +73,153 @@
             --radius-xl: 36px;
         }
 
-        /* ==========================================================================
-           Reset
-           ========================================================================== */
+        @keyframes rgbFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        @keyframes pulseRing {
+            0% {
+                opacity: 0.7;
+                transform: scale(0.6);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
+        }
+
+        @keyframes bgPulse {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.85;
+            }
+
+            50% {
+                transform: scale(1.06) rotate(2deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.02) rotate(-1deg);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes ledBlink {
+
+            0%,
+            44%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50%,
+            94% {
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes scanDown {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 1;
+            }
+
+            92% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(calc(100vh + 480px));
+                opacity: 0;
+            }
+        }
+
+        @keyframes particleDrift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-2.5vw, -4vh);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes profileGlow {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 30px 80px rgba(0, 0, 0, 0.9),
+                    0 0 40px rgba(255, 0, 128, 0.1);
+            }
+
+            50% {
+                box-shadow:
+                    0 30px 80px rgba(0, 0, 0, 0.9),
+                    0 0 70px rgba(0, 229, 255, 0.22);
+            }
+        }
+
+        @keyframes haloPulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes ringRotateSlow {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes contactGlowR {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes contactGlowL {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -101,12 +259,12 @@
         }
 
         ::selection {
-            background: var(--lime);
+            background: var(--rgb-pink);
             color: var(--color-black);
         }
 
         :focus-visible {
-            outline: 2px solid var(--lime);
+            outline: 2px solid var(--rgb-cyan);
             outline-offset: 3px;
             border-radius: 4px;
         }
@@ -120,7 +278,6 @@
             width: 0;
             height: 0;
             overflow: hidden;
-            visibility: hidden;
         }
 
         /* ==========================================================================
@@ -140,38 +297,19 @@
             pointer-events: none;
         }
 
-        /* لایه ۱: هاله های خاکستری بسیار محو + یک لمس لیمو */
         .aurora-bg {
             inset: -20%;
             background:
-                radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.03), transparent 45%),
-                radial-gradient(circle at 85% 15%, rgba(212, 255, 0, 0.04), transparent 48%),
-                radial-gradient(circle at 50% 90%, rgba(255, 255, 255, 0.02), transparent 50%),
-                radial-gradient(circle at 92% 82%, rgba(212, 255, 0, 0.03), transparent 45%),
-                radial-gradient(circle at 8% 70%, rgba(255, 255, 255, 0.02), transparent 42%);
+                radial-gradient(circle at 15% 20%, rgba(255, 0, 128, 0.05), transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(0, 229, 255, 0.05), transparent 48%),
+                radial-gradient(circle at 50% 90%, rgba(160, 51, 255, 0.04), transparent 50%),
+                radial-gradient(circle at 92% 82%, rgba(0, 255, 136, 0.03), transparent 45%),
+                radial-gradient(circle at 8% 70%, rgba(255, 217, 61, 0.03), transparent 42%);
             filter: blur(90px);
             animation: bgPulse 28s ease-in-out infinite alternate;
             will-change: transform, opacity;
         }
 
-        @keyframes bgPulse {
-            0% {
-                transform: scale(1) rotate(0deg);
-                opacity: 0.85;
-            }
-
-            50% {
-                transform: scale(1.06) rotate(2deg);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(1.02) rotate(-1deg);
-                opacity: 0.9;
-            }
-        }
-
-        /* لایه ۲: چراغ های LED — لیمو */
         .rack-leds {
             inset: 0;
             opacity: 0.5;
@@ -185,17 +323,17 @@
             width: 3px;
             height: 3px;
             border-radius: 50%;
-            background: var(--lime);
+            background: var(--rgb-pink);
             box-shadow:
-                0 0 8px var(--lime),
-                0 0 16px rgba(212, 255, 0, 0.6),
-                0 55px 0 0 var(--lime),
+                0 0 8px var(--rgb-pink),
+                0 0 16px rgba(255, 0, 128, 0.6),
+                0 55px 0 0 var(--rgb-cyan),
                 0 130px 0 0 rgba(255, 255, 255, 0.8),
-                0 210px 0 0 var(--lime),
-                0 290px 0 0 rgba(184, 217, 0, 0.9),
-                0 390px 0 0 var(--lime),
+                0 210px 0 0 var(--rgb-green),
+                0 290px 0 0 rgba(160, 51, 255, 0.9),
+                0 390px 0 0 var(--rgb-yellow),
                 0 490px 0 0 rgba(255, 255, 255, 0.7),
-                0 590px 0 0 var(--lime);
+                0 590px 0 0 var(--rgb-blue);
             animation: ledBlink 3.2s steps(2, end) infinite;
             will-change: opacity;
         }
@@ -210,21 +348,6 @@
             animation-duration: 3.8s;
         }
 
-        @keyframes ledBlink {
-
-            0%,
-            44%,
-            100% {
-                opacity: 0.3;
-            }
-
-            50%,
-            94% {
-                opacity: 0.9;
-            }
-        }
-
-        /* لایه ۳: خطوط عمودی رک — خاکستری */
         .server-rack-lines {
             inset: 0;
             background-image: repeating-linear-gradient(90deg,
@@ -237,7 +360,6 @@
             opacity: 0.6;
         }
 
-        /* لایه ۴: پرتوی اسکنر — سفید محو */
         .scan-beam {
             inset: 0;
             overflow: hidden;
@@ -261,27 +383,6 @@
             will-change: transform, opacity;
         }
 
-        @keyframes scanDown {
-            0% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-
-            8% {
-                opacity: 1;
-            }
-
-            92% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(calc(100vh + 480px));
-                opacity: 0;
-            }
-        }
-
-        /* لایه ۵: نقطه چین — خاکستری */
         .grid-dots {
             inset: 0;
             background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
@@ -290,7 +391,6 @@
             -webkit-mask-image: radial-gradient(ellipse at 50% 35%, black 15%, transparent 72%);
         }
 
-        /* لایه ۶: ذرات — سفید و لیمو */
         .particles {
             inset: 0;
         }
@@ -304,53 +404,38 @@
             width: 2px;
             height: 2px;
             border-radius: 50%;
-            background: var(--lime);
+            background: var(--rgb-pink);
             box-shadow:
-                10vw 20vh 0 0 rgba(255, 255, 255, 0.5),
-                30vw 60vh 0 0 rgba(212, 255, 0, 0.4),
-                50vw 10vh 0 0 rgba(255, 255, 255, 0.4),
-                70vw 80vh 0 0 rgba(212, 255, 0, 0.4),
-                90vw 40vh 0 0 rgba(255, 255, 255, 0.4),
-                20vw 90vh 0 0 rgba(212, 255, 0, 0.3),
-                60vw 30vh 0 0 rgba(255, 255, 255, 0.3),
-                80vw 70vh 0 0 rgba(212, 255, 0, 0.4),
-                15vw 45vh 0 0 rgba(255, 255, 255, 0.3),
-                45vw 75vh 0 0 rgba(212, 255, 0, 0.3),
-                5vw 35vh 0 0 rgba(255, 255, 255, 0.4),
-                35vw 15vh 0 0 rgba(212, 255, 0, 0.3);
+                10vw 20vh 0 0 rgba(255, 0, 128, 0.5),
+                30vw 60vh 0 0 rgba(0, 229, 255, 0.4),
+                50vw 10vh 0 0 rgba(0, 255, 136, 0.4),
+                70vw 80vh 0 0 rgba(255, 217, 61, 0.4),
+                90vw 40vh 0 0 rgba(160, 51, 255, 0.4),
+                20vw 90vh 0 0 rgba(255, 0, 128, 0.3),
+                60vw 30vh 0 0 rgba(0, 229, 255, 0.3),
+                80vw 70vh 0 0 rgba(0, 255, 136, 0.4),
+                15vw 45vh 0 0 rgba(255, 217, 61, 0.3),
+                45vw 75vh 0 0 rgba(160, 51, 255, 0.3),
+                5vw 35vh 0 0 rgba(255, 0, 128, 0.4),
+                35vw 15vh 0 0 rgba(0, 229, 255, 0.3);
             animation: particleDrift 45s linear infinite;
             will-change: transform;
         }
 
         .particles::after {
             box-shadow:
-                25vw 15vh 0 0 rgba(255, 255, 255, 0.4),
-                55vw 50vh 0 0 rgba(212, 255, 0, 0.3),
-                75vw 25vh 0 0 rgba(255, 255, 255, 0.4),
-                5vw 70vh 0 0 rgba(212, 255, 0, 0.3),
-                95vw 60vh 0 0 rgba(255, 255, 255, 0.3),
-                35vw 85vh 0 0 rgba(212, 255, 0, 0.3),
-                65vw 90vh 0 0 rgba(255, 255, 255, 0.4),
-                85vw 5vh 0 0 rgba(212, 255, 0, 0.3),
-                12vw 58vh 0 0 rgba(255, 255, 255, 0.3);
+                25vw 15vh 0 0 rgba(0, 255, 136, 0.4),
+                55vw 50vh 0 0 rgba(255, 217, 61, 0.3),
+                75vw 25vh 0 0 rgba(160, 51, 255, 0.4),
+                5vw 70vh 0 0 rgba(255, 0, 128, 0.3),
+                95vw 60vh 0 0 rgba(0, 229, 255, 0.3),
+                35vw 85vh 0 0 rgba(0, 255, 136, 0.3),
+                65vw 90vh 0 0 rgba(255, 217, 61, 0.4),
+                85vw 5vh 0 0 rgba(160, 51, 255, 0.3),
+                12vw 58vh 0 0 rgba(255, 0, 128, 0.3);
             animation: particleDrift 60s linear infinite reverse;
         }
 
-        @keyframes particleDrift {
-            0% {
-                transform: translate(0, 0);
-            }
-
-            50% {
-                transform: translate(-2.5vw, -4vh);
-            }
-
-            100% {
-                transform: translate(0, 0);
-            }
-        }
-
-        /* لایه ۷: گرین */
         .grain-overlay {
             inset: 0;
             opacity: 0.05;
@@ -358,7 +443,7 @@
         }
 
         /* ==========================================================================
-           نوار پیشرفت — لیمو
+           نوار پیشرفت — RGB جاری
            ========================================================================== */
         .scroll-progress {
             position: fixed;
@@ -366,9 +451,13 @@
             right: 0;
             height: 2px;
             width: 0%;
-            background: var(--lime);
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
             z-index: 1000;
-            box-shadow: 0 0 10px rgba(212, 255, 0, 0.5);
+            box-shadow:
+                0 0 10px rgba(255, 0, 128, 0.5),
+                0 0 20px rgba(0, 229, 255, 0.3);
+            animation: rgbFlow 4s linear infinite;
             transition: width 0.1s linear;
         }
 
@@ -419,31 +508,15 @@
         }
 
         .nav-brand-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: var(--lime);
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 3s linear infinite;
             box-shadow:
-                0 0 0 3px rgba(212, 255, 0, 0.15),
-                0 0 12px rgba(212, 255, 0, 0.9);
-            animation: dotPulse 2.8s ease-in-out infinite;
-            will-change: box-shadow;
-        }
-
-        @keyframes dotPulse {
-
-            0%,
-            100% {
-                box-shadow:
-                    0 0 0 3px rgba(212, 255, 0, 0.15),
-                    0 0 12px rgba(212, 255, 0, 0.9);
-            }
-
-            50% {
-                box-shadow:
-                    0 0 0 6px rgba(212, 255, 0, 0.05),
-                    0 0 22px rgba(212, 255, 0, 1);
-            }
+                0 0 8px rgba(255, 0, 128, 0.7),
+                0 0 16px rgba(0, 229, 255, 0.5);
         }
 
         .nav-links {
@@ -482,9 +555,13 @@
         }
 
         .nav-cta:hover {
-            background: var(--lime);
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 3s linear infinite;
             transform: translateY(-1px);
-            box-shadow: 0 8px 24px rgba(212, 255, 0, 0.3);
+            box-shadow:
+                0 8px 24px rgba(255, 0, 128, 0.3),
+                0 0 40px rgba(0, 229, 255, 0.2);
         }
 
         /* ==========================================================================
@@ -520,7 +597,6 @@
             min-width: 0;
         }
 
-        /* وضعیت کار — مینیمال، حاشیه خاکستری، نقطه لیمو */
         .status-pill {
             display: inline-flex;
             align-items: center;
@@ -537,11 +613,15 @@
 
         .status-pill-dot {
             position: relative;
-            width: 7px;
-            height: 7px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            background: var(--lime);
-            box-shadow: 0 0 10px rgba(212, 255, 0, 0.9);
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 3s linear infinite;
+            box-shadow:
+                0 0 8px rgba(255, 0, 128, 0.8),
+                0 0 16px rgba(0, 229, 255, 0.5);
         }
 
         .status-pill-dot::after {
@@ -549,24 +629,11 @@
             position: absolute;
             inset: -4px;
             border-radius: 50%;
-            border: 1.5px solid var(--lime);
+            border: 1.5px solid var(--rgb-cyan);
             opacity: 0;
             animation: pulseRing 2.8s ease-out infinite;
         }
 
-        @keyframes pulseRing {
-            0% {
-                opacity: 0.7;
-                transform: scale(0.6);
-            }
-
-            100% {
-                opacity: 0;
-                transform: scale(2);
-            }
-        }
-
-        /* عنوان — سفید تمیز، بدون درخشش */
         .hero-title {
             font-size: clamp(2.4rem, 5vw, 3.8rem);
             font-weight: 900;
@@ -585,10 +652,15 @@
             flex-wrap: wrap;
         }
 
-        /* تاکید — لیمو Flat (نه گرادیان) */
         .hero-subtitle-accent {
-            color: var(--lime);
+            background-image: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
             font-weight: 800;
+            animation: rgbFlow 5s linear infinite;
         }
 
         .hero-subtitle-divider {
@@ -639,21 +711,60 @@
         }
 
         .action-btn--primary:hover {
-            background: var(--lime);
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 3s linear infinite;
+            color: var(--color-black);
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(212, 255, 0, 0.3);
+            box-shadow:
+                0 12px 30px rgba(255, 0, 128, 0.3),
+                0 0 40px rgba(0, 229, 255, 0.2);
         }
 
         .action-btn--ghost {
+            position: relative;
             background: transparent;
             color: var(--text-primary);
             border-color: var(--border-medium);
         }
 
         .action-btn--ghost:hover {
-            border-color: var(--lime);
-            color: var(--lime);
+            border-color: transparent;
             transform: translateY(-2px);
+            background-image: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: rgbFlow 4s linear infinite;
+        }
+
+        /* ====== اصلاح: آیکون SVG در هاور قابل مشاهده بماند ====== */
+        .action-btn--ghost:hover svg {
+            stroke: url(#rgbStroke);
+            -webkit-text-fill-color: currentColor;
+        }
+
+        .action-btn--ghost::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 4s linear infinite;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.35s var(--easing);
+            pointer-events: none;
+        }
+
+        .action-btn--ghost:hover::before {
+            opacity: 1;
         }
 
         .hero-stats {
@@ -678,9 +789,14 @@
             line-height: 1.1;
         }
 
-        /* عدد تاکیدی — لیمو */
         .stat-value--gradient {
-            color: var(--lime);
+            background-image: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: rgbFlow 5s linear infinite;
         }
 
         .stat-label {
@@ -690,7 +806,6 @@
             white-space: nowrap;
         }
 
-        /* طرف تصویری */
         .hero-visual-side {
             display: flex;
             justify-content: center;
@@ -700,7 +815,6 @@
             max-width: 100%;
         }
 
-        /* فریم پروفایل — گرادیان خاکستری به لیمو، بدون چرخش */
         .hero-profile-frame {
             position: relative;
             width: clamp(240px, 26vw, 320px);
@@ -710,29 +824,13 @@
             border-radius: var(--radius-xl);
             background:
                 linear-gradient(#000000, #000000) padding-box,
-                linear-gradient(135deg,
-                    rgba(255, 255, 255, 0.4),
-                    rgba(212, 255, 0, 0.5),
-                    rgba(255, 255, 255, 0.4)) border-box;
+                var(--rgb-gradient) border-box;
+            background-size: 100% 100%, 200% 100%;
             border: 3px solid transparent;
-            animation: profileGlow 5s ease-in-out infinite;
-            will-change: box-shadow;
-        }
-
-        @keyframes profileGlow {
-
-            0%,
-            100% {
-                box-shadow:
-                    0 30px 80px rgba(0, 0, 0, 0.9),
-                    0 0 40px rgba(212, 255, 0, 0.08);
-            }
-
-            50% {
-                box-shadow:
-                    0 30px 80px rgba(0, 0, 0, 0.9),
-                    0 0 70px rgba(212, 255, 0, 0.22);
-            }
+            animation:
+                rgbFlow 5s linear infinite,
+                profileGlow 5s ease-in-out infinite;
+            will-change: background-position, box-shadow;
         }
 
         .hero-image {
@@ -747,25 +845,14 @@
             position: absolute;
             inset: -30px;
             border-radius: calc(var(--radius-xl) + 30px);
-            background: radial-gradient(circle, rgba(212, 255, 0, 0.12), transparent 65%);
+            background: radial-gradient(circle,
+                    rgba(255, 0, 128, 0.12),
+                    rgba(0, 229, 255, 0.1),
+                    transparent 65%);
             filter: blur(45px);
             z-index: -1;
             animation: haloPulse 6s ease-in-out infinite;
             will-change: transform, opacity;
-        }
-
-        @keyframes haloPulse {
-
-            0%,
-            100% {
-                opacity: 0.5;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.9;
-                transform: scale(1.05);
-            }
         }
 
         .hero-orbit {
@@ -777,24 +864,20 @@
             pointer-events: none;
         }
 
-        @keyframes ringRotateSlow {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
         .hero-orbit-dot {
             position: absolute;
             top: -3px;
             left: 50%;
             transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            background: var(--lime);
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 3s linear infinite;
             box-shadow:
-                0 0 12px var(--lime),
-                0 0 24px rgba(212, 255, 0, 0.6);
+                0 0 12px rgba(255, 0, 128, 0.8),
+                0 0 24px rgba(0, 229, 255, 0.6);
         }
 
         /* ==========================================================================
@@ -836,10 +919,13 @@
         }
 
         .section-eyebrow-line {
-            width: 28px;
+            width: 32px;
             height: 2px;
             border-radius: 2px;
-            background: var(--lime);
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 4s linear infinite;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
         }
 
         .section-title {
@@ -851,7 +937,7 @@
         }
 
         /* ==========================================================================
-           تخصص — کارت ها با حاشیه خاکستری ثابت، لیمو در hover
+           تخصص
            ========================================================================== */
         #expertise .section-header {
             align-items: center;
@@ -889,18 +975,19 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 50% 100%, rgba(212, 255, 0, 0.06), transparent 60%);
+            background: radial-gradient(circle at 50% 100%, rgba(255, 0, 128, 0.06), transparent 60%);
             opacity: 0;
             transition: opacity 0.55s var(--easing);
             pointer-events: none;
         }
 
         .expertise-card:hover {
-            border-color: var(--border-bright);
+            border-color: transparent;
             transform: translateY(-4px);
             box-shadow:
                 0 24px 50px rgba(0, 0, 0, 0.9),
-                0 0 30px rgba(212, 255, 0, 0.1);
+                0 0 30px rgba(255, 0, 128, 0.1),
+                0 0 60px rgba(0, 229, 255, 0.06);
         }
 
         .expertise-card:hover::after {
@@ -921,9 +1008,10 @@
             transition: all 0.55s var(--easing);
         }
 
+        /* ====== اصلاح: جایگزینی var(--lime) با رنگ معتبر ====== */
         .expertise-card:hover .expertise-icon {
-            color: var(--lime);
-            border-color: rgba(212, 255, 0, 0.4);
+            color: var(--rgb-pink);
+            border-color: rgba(255, 0, 128, 0.4);
         }
 
         .expertise-title {
@@ -984,12 +1072,18 @@
         }
 
         .journey-row--active {
-            background: linear-gradient(90deg, rgba(212, 255, 0, 0.04), transparent);
+            background: linear-gradient(90deg, rgba(255, 0, 128, 0.04), transparent);
         }
 
         .journey-row--active .journey-dot {
-            background: var(--lime);
-            animation: dotPulse 2.5s ease-in-out infinite;
+            width: 10px;
+            height: 10px;
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 3s linear infinite;
+            box-shadow:
+                0 0 10px rgba(255, 0, 128, 0.8),
+                0 0 20px rgba(0, 229, 255, 0.5);
         }
 
         .journey-info {
@@ -1030,9 +1124,31 @@
         }
 
         .journey-badge--gold {
-            background: rgba(212, 255, 0, 0.08);
-            color: var(--lime);
-            border-color: rgba(212, 255, 0, 0.35);
+            position: relative;
+            background: transparent;
+            border: none;
+            background-image: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: rgbFlow 4s linear infinite;
+        }
+
+        .journey-badge--gold::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 4s linear infinite;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
         }
 
         /* ==========================================================================
@@ -1046,6 +1162,7 @@
         }
 
         .skill-tag {
+            position: relative;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -1060,20 +1177,42 @@
         }
 
         .skill-tag:hover {
-            border-color: var(--border-bright);
-            background: rgba(212, 255, 0, 0.05);
+            border-color: transparent;
+            background-image: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: rgbFlow 4s linear infinite;
             transform: translateY(-2px);
-            color: var(--lime);
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 4s linear infinite;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s var(--easing);
+            pointer-events: none;
+        }
+
+        .skill-tag:hover::before {
+            opacity: 1;
         }
 
         .skill-tag-icon {
             color: var(--gray-400);
             display: flex;
             transition: all 0.4s var(--easing);
-        }
-
-        .skill-tag:hover .skill-tag-icon {
-            color: var(--lime);
         }
 
         /* ==========================================================================
@@ -1103,7 +1242,7 @@
             transform: translateY(-4px);
             box-shadow:
                 0 20px 45px rgba(0, 0, 0, 0.9),
-                0 0 30px rgba(212, 255, 0, 0.08);
+                0 0 30px rgba(160, 51, 255, 0.1);
         }
 
         .cert-media {
@@ -1170,20 +1309,42 @@
             transform: translateY(-3px);
             box-shadow:
                 0 20px 40px rgba(0, 0, 0, 0.9),
-                0 0 25px rgba(212, 255, 0, 0.08);
+                0 0 25px rgba(0, 255, 136, 0.1);
         }
 
         .education-type {
+            position: relative;
             display: inline-block;
             font-size: 0.7rem;
             font-weight: 700;
-            color: var(--lime);
-            background: rgba(212, 255, 0, 0.05);
-            border: 1px solid rgba(212, 255, 0, 0.2);
+            background: transparent;
+            border: none;
             border-radius: 999px;
-            padding: 2px 10px;
+            padding: 3px 12px;
             width: fit-content;
             letter-spacing: 0.3px;
+            background-image: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: rgbFlow 4s linear infinite;
+        }
+
+        .education-type::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 4s linear infinite;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
         }
 
         .education-degree {
@@ -1228,7 +1389,7 @@
             right: -20%;
             width: 60%;
             height: 200%;
-            background: radial-gradient(circle, rgba(212, 255, 0, 0.06), transparent 60%);
+            background: radial-gradient(circle, rgba(255, 0, 128, 0.07), transparent 60%);
             pointer-events: none;
             animation: contactGlowR 7s ease-in-out infinite;
         }
@@ -1240,33 +1401,9 @@
             left: -20%;
             width: 60%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.04), transparent 60%);
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.05), transparent 60%);
             pointer-events: none;
             animation: contactGlowL 9s ease-in-out infinite;
-        }
-
-        @keyframes contactGlowR {
-
-            0%,
-            100% {
-                opacity: 0.6;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes contactGlowL {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.6;
-            }
         }
 
         .contact-title {
@@ -1304,21 +1441,60 @@
         }
 
         .contact-action--email:hover {
-            background: var(--lime);
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 3s linear infinite;
+            color: var(--color-black);
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(212, 255, 0, 0.3);
+            box-shadow:
+                0 12px 30px rgba(255, 0, 128, 0.3),
+                0 0 40px rgba(0, 229, 255, 0.2);
         }
 
         .contact-action--outline {
+            position: relative;
             background: transparent;
             color: var(--text-primary);
             border-color: var(--border-medium);
         }
 
         .contact-action--outline:hover {
-            border-color: var(--lime);
-            color: var(--lime);
+            border-color: transparent;
             transform: translateY(-2px);
+            background-image: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: rgbFlow 4s linear infinite;
+        }
+
+        /* ====== اصلاح: آیکون SVG در هاور قابل مشاهده بماند ====== */
+        .contact-action--outline:hover svg {
+            stroke: url(#rgbStroke);
+            -webkit-text-fill-color: currentColor;
+        }
+
+        .contact-action--outline::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: var(--rgb-gradient);
+            background-size: 200% auto;
+            animation: rgbFlow 4s linear infinite;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.35s var(--easing);
+            pointer-events: none;
+        }
+
+        .contact-action--outline:hover::before {
+            opacity: 1;
         }
 
         /* ==========================================================================
@@ -1343,8 +1519,14 @@
         }
 
         .footer-text span {
-            color: var(--lime);
+            background-image: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
             font-weight: 700;
+            animation: rgbFlow 5s linear infinite;
         }
 
         .footer-link {
@@ -1354,7 +1536,13 @@
         }
 
         .footer-link:hover {
-            color: var(--lime);
+            background-image: var(--rgb-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: rgbFlow 4s linear infinite;
         }
 
         /* ==========================================================================
@@ -1462,10 +1650,10 @@
             }
 
             .hero-profile-frame {
-                animation: none;
+                animation: profileGlow 5s ease-in-out infinite;
                 box-shadow:
                     0 20px 50px rgba(0, 0, 0, 0.9),
-                    0 0 30px rgba(212, 255, 0, 0.15);
+                    0 0 30px rgba(255, 0, 128, 0.15);
             }
 
             .hero-profile-halo {
@@ -1593,13 +1781,103 @@
                 scroll-behavior: auto !important;
             }
         }
+
+        /* ==========================================================================
+           Performance Lite Mode — دستگاه های لمسی
+           ========================================================================== */
+        @media (hover: none) and (pointer: coarse) {
+
+            .site-nav,
+            .expertise-card,
+            .journey-list,
+            .cert-card,
+            .education-card,
+            .contact-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(5, 5, 5, 0.96);
+            }
+
+            .rack-leds,
+            .server-rack-lines,
+            .scan-beam,
+            .particles,
+            .grain-overlay {
+                display: none;
+            }
+
+            .aurora-bg {
+                inset: 0;
+                filter: blur(50px);
+                animation: none;
+                opacity: 0.6;
+                will-change: auto;
+            }
+
+            .hero-profile-frame,
+            .hero-profile-halo,
+            .hero-orbit,
+            .nav-brand-dot,
+            .status-pill-dot,
+            .journey-row--active .journey-dot,
+            .contact-card::before,
+            .contact-card::after {
+                animation: none;
+            }
+
+            .hero-subtitle-accent,
+            .stat-value--gradient,
+            .footer-text span,
+            .journey-badge--gold,
+            .education-type,
+            .section-eyebrow-line,
+            .scroll-progress {
+                animation-duration: 8s;
+            }
+
+            .status-pill-dot::after {
+                display: none;
+            }
+
+            .hero-profile-frame {
+                box-shadow:
+                    0 20px 50px rgba(0, 0, 0, 0.9),
+                    0 0 30px rgba(255, 0, 128, 0.15);
+            }
+
+            .hero-profile-halo {
+                opacity: 0.5;
+                inset: -12px;
+                filter: blur(24px);
+                will-change: auto;
+            }
+
+            .hero-orbit {
+                inset: -18px;
+            }
+
+            .scroll-progress {
+                will-change: auto;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- SVG Sprite -->
+    <!-- SVG Sprite با گرادیان RGB برای stroke آیکون ها -->
     <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+            <linearGradient id="rgbStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff0080" />
+                <stop offset="16%" stop-color="#ff8c00" />
+                <stop offset="33%" stop-color="#ffd93d" />
+                <stop offset="50%" stop-color="#00ff88" />
+                <stop offset="66%" stop-color="#00e5ff" />
+                <stop offset="83%" stop-color="#2979ff" />
+                <stop offset="100%" stop-color="#a033ff" />
+            </linearGradient>
+        </defs>
         <symbol id="i-hardware" viewBox="0 0 24 24">
             <rect x="4" y="4" width="16" height="16" rx="2" />
             <rect x="9" y="9" width="6" height="6" />
@@ -2057,7 +2335,6 @@
     </footer>
 
     <script>
-        /* داده مهارت ها */
         const SKILLS = [
             { icon: 'hardware', label: 'سخت افزار' },
             { icon: 'windows', label: 'ویندوز' },
@@ -2069,14 +2346,13 @@
             { icon: 'problem', label: 'حل مسئله' },
         ];
 
-        /* رندر مهارت ها */
         const skillsTags = document.getElementById('skillsTags');
         if (skillsTags) {
             skillsTags.innerHTML = SKILLS.map(({ icon, label }) => `
                 <span class="skill-tag">
                     <span class="skill-tag-icon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2"
+                             stroke="url(#rgbStroke)" stroke-width="2"
                              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <use href="#i-${icon}"/>
                         </svg>
@@ -2086,7 +2362,6 @@
             `).join('');
         }
 
-        /* نوار پیشرفت */
         const scrollProgress = document.getElementById('scrollProgress');
         const updateScrollProgress = () => {
             const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -2096,7 +2371,6 @@
         window.addEventListener('scroll', updateScrollProgress, { passive: true });
         updateScrollProgress();
 
-        /* Reveal */
         const revealElements = document.querySelectorAll('.reveal');
         if ('IntersectionObserver' in window) {
             const revealObserver = new IntersectionObserver((entries) => {
@@ -2116,7 +2390,6 @@
             revealElements.forEach((el) => el.classList.add('is-visible'));
         }
 
-        /* محافظت از ایمیل */
         const emailLinks = document.querySelectorAll('.js-email');
         let emailRevealed = false;
 
