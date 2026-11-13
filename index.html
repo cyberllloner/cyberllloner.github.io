@@ -11,7 +11,7 @@
 
     <style>
         /* ==========================================================================
-           RGB Flow — جریان رنگین کمانی خطی از چپ به راست
+           RGB Flow — Pinks, Purples, Blues
            ========================================================================== */
         @property --angle {
             syntax: '<angle>';
@@ -36,24 +36,28 @@
             --gray-800: #1a1a1a;
             --gray-900: #0d0d0d;
 
-            /* پالت RGB */
+            /* پالت RGB — فقط Pinks, Purples, Blues */
             --rgb-pink: #ff0080;
-            --rgb-orange: #ff8c00;
-            --rgb-yellow: #ffd93d;
-            --rgb-green: #00ff88;
-            --rgb-cyan: #00e5ff;
-            --rgb-blue: #2979ff;
-            --rgb-purple: #a033ff;
+            --rgb-rose: #ff2d9f;
+            --rgb-fuchsia: #e879f9;
+            --rgb-violet: #a855f7;
+            --rgb-purple: #7c3aed;
+            --rgb-indigo: #6366f1;
+            --rgb-blue: #3b82f6;
 
-            /* گرادیان RGB */
+            /* گرادیان RGB — چرخه پیوسته Pink → Purple → Blue → Purple → Pink */
             --rgb-gradient: linear-gradient(90deg,
                     #ff0080 0%,
-                    #ff8c00 14%,
-                    #ffd93d 28%,
-                    #00ff88 42%,
-                    #00e5ff 56%,
-                    #2979ff 70%,
-                    #a033ff 84%,
+                    #ff2d9f 10%,
+                    #e879f9 20%,
+                    #c084fc 30%,
+                    #a855f7 40%,
+                    #7c3aed 50%,
+                    #6366f1 60%,
+                    #3b82f6 68%,
+                    #6366f1 76%,
+                    #a855f7 84%,
+                    #e879f9 92%,
                     #ff0080 100%);
 
             --text-primary: #ffffff;
@@ -172,7 +176,7 @@
             50% {
                 box-shadow:
                     0 30px 80px rgba(0, 0, 0, 0.9),
-                    0 0 70px rgba(0, 229, 255, 0.22);
+                    0 0 70px rgba(59, 130, 246, 0.22);
             }
         }
 
@@ -264,7 +268,7 @@
         }
 
         :focus-visible {
-            outline: 2px solid var(--rgb-cyan);
+            outline: 2px solid var(--rgb-blue);
             outline-offset: 3px;
             border-radius: 4px;
         }
@@ -300,11 +304,11 @@
         .aurora-bg {
             inset: -20%;
             background:
-                radial-gradient(circle at 15% 20%, rgba(255, 0, 128, 0.05), transparent 45%),
-                radial-gradient(circle at 85% 15%, rgba(0, 229, 255, 0.05), transparent 48%),
-                radial-gradient(circle at 50% 90%, rgba(160, 51, 255, 0.04), transparent 50%),
-                radial-gradient(circle at 92% 82%, rgba(0, 255, 136, 0.03), transparent 45%),
-                radial-gradient(circle at 8% 70%, rgba(255, 217, 61, 0.03), transparent 42%);
+                radial-gradient(circle at 15% 20%, rgba(255, 0, 128, 0.06), transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.05), transparent 48%),
+                radial-gradient(circle at 50% 90%, rgba(168, 85, 247, 0.04), transparent 50%),
+                radial-gradient(circle at 92% 82%, rgba(232, 121, 249, 0.03), transparent 45%),
+                radial-gradient(circle at 8% 70%, rgba(99, 102, 241, 0.03), transparent 42%);
             filter: blur(90px);
             animation: bgPulse 28s ease-in-out infinite alternate;
             will-change: transform, opacity;
@@ -327,11 +331,11 @@
             box-shadow:
                 0 0 8px var(--rgb-pink),
                 0 0 16px rgba(255, 0, 128, 0.6),
-                0 55px 0 0 var(--rgb-cyan),
+                0 55px 0 0 var(--rgb-fuchsia),
                 0 130px 0 0 rgba(255, 255, 255, 0.8),
-                0 210px 0 0 var(--rgb-green),
-                0 290px 0 0 rgba(160, 51, 255, 0.9),
-                0 390px 0 0 var(--rgb-yellow),
+                0 210px 0 0 var(--rgb-violet),
+                0 290px 0 0 rgba(124, 58, 237, 0.9),
+                0 390px 0 0 var(--rgb-indigo),
                 0 490px 0 0 rgba(255, 255, 255, 0.7),
                 0 590px 0 0 var(--rgb-blue);
             animation: ledBlink 3.2s steps(2, end) infinite;
@@ -407,31 +411,31 @@
             background: var(--rgb-pink);
             box-shadow:
                 10vw 20vh 0 0 rgba(255, 0, 128, 0.5),
-                30vw 60vh 0 0 rgba(0, 229, 255, 0.4),
-                50vw 10vh 0 0 rgba(0, 255, 136, 0.4),
-                70vw 80vh 0 0 rgba(255, 217, 61, 0.4),
-                90vw 40vh 0 0 rgba(160, 51, 255, 0.4),
+                30vw 60vh 0 0 rgba(232, 121, 249, 0.4),
+                50vw 10vh 0 0 rgba(168, 85, 247, 0.4),
+                70vw 80vh 0 0 rgba(99, 102, 241, 0.4),
+                90vw 40vh 0 0 rgba(59, 130, 246, 0.4),
                 20vw 90vh 0 0 rgba(255, 0, 128, 0.3),
-                60vw 30vh 0 0 rgba(0, 229, 255, 0.3),
-                80vw 70vh 0 0 rgba(0, 255, 136, 0.4),
-                15vw 45vh 0 0 rgba(255, 217, 61, 0.3),
-                45vw 75vh 0 0 rgba(160, 51, 255, 0.3),
+                60vw 30vh 0 0 rgba(232, 121, 249, 0.3),
+                80vw 70vh 0 0 rgba(168, 85, 247, 0.4),
+                15vw 45vh 0 0 rgba(99, 102, 241, 0.3),
+                45vw 75vh 0 0 rgba(59, 130, 246, 0.3),
                 5vw 35vh 0 0 rgba(255, 0, 128, 0.4),
-                35vw 15vh 0 0 rgba(0, 229, 255, 0.3);
+                35vw 15vh 0 0 rgba(232, 121, 249, 0.3);
             animation: particleDrift 45s linear infinite;
             will-change: transform;
         }
 
         .particles::after {
             box-shadow:
-                25vw 15vh 0 0 rgba(0, 255, 136, 0.4),
-                55vw 50vh 0 0 rgba(255, 217, 61, 0.3),
-                75vw 25vh 0 0 rgba(160, 51, 255, 0.4),
+                25vw 15vh 0 0 rgba(168, 85, 247, 0.4),
+                55vw 50vh 0 0 rgba(99, 102, 241, 0.3),
+                75vw 25vh 0 0 rgba(59, 130, 246, 0.4),
                 5vw 70vh 0 0 rgba(255, 0, 128, 0.3),
-                95vw 60vh 0 0 rgba(0, 229, 255, 0.3),
-                35vw 85vh 0 0 rgba(0, 255, 136, 0.3),
-                65vw 90vh 0 0 rgba(255, 217, 61, 0.4),
-                85vw 5vh 0 0 rgba(160, 51, 255, 0.3),
+                95vw 60vh 0 0 rgba(232, 121, 249, 0.3),
+                35vw 85vh 0 0 rgba(168, 85, 247, 0.3),
+                65vw 90vh 0 0 rgba(99, 102, 241, 0.4),
+                85vw 5vh 0 0 rgba(59, 130, 246, 0.3),
                 12vw 58vh 0 0 rgba(255, 0, 128, 0.3);
             animation: particleDrift 60s linear infinite reverse;
         }
@@ -443,7 +447,7 @@
         }
 
         /* ==========================================================================
-           نوار پیشرفت — RGB جاری
+           نوار پیشرفت
            ========================================================================== */
         .scroll-progress {
             position: fixed;
@@ -456,7 +460,7 @@
             z-index: 1000;
             box-shadow:
                 0 0 10px rgba(255, 0, 128, 0.5),
-                0 0 20px rgba(0, 229, 255, 0.3);
+                0 0 20px rgba(59, 130, 246, 0.3);
             animation: rgbFlow 4s linear infinite;
             transition: width 0.1s linear;
         }
@@ -516,7 +520,7 @@
             animation: rgbFlow 3s linear infinite;
             box-shadow:
                 0 0 8px rgba(255, 0, 128, 0.7),
-                0 0 16px rgba(0, 229, 255, 0.5);
+                0 0 16px rgba(59, 130, 246, 0.5);
         }
 
         .nav-links {
@@ -561,7 +565,7 @@
             transform: translateY(-1px);
             box-shadow:
                 0 8px 24px rgba(255, 0, 128, 0.3),
-                0 0 40px rgba(0, 229, 255, 0.2);
+                0 0 40px rgba(59, 130, 246, 0.2);
         }
 
         /* ==========================================================================
@@ -621,7 +625,7 @@
             animation: rgbFlow 3s linear infinite;
             box-shadow:
                 0 0 8px rgba(255, 0, 128, 0.8),
-                0 0 16px rgba(0, 229, 255, 0.5);
+                0 0 16px rgba(59, 130, 246, 0.5);
         }
 
         .status-pill-dot::after {
@@ -629,7 +633,7 @@
             position: absolute;
             inset: -4px;
             border-radius: 50%;
-            border: 1.5px solid var(--rgb-cyan);
+            border: 1.5px solid var(--rgb-blue);
             opacity: 0;
             animation: pulseRing 2.8s ease-out infinite;
         }
@@ -718,7 +722,7 @@
             transform: translateY(-2px);
             box-shadow:
                 0 12px 30px rgba(255, 0, 128, 0.3),
-                0 0 40px rgba(0, 229, 255, 0.2);
+                0 0 40px rgba(59, 130, 246, 0.2);
         }
 
         .action-btn--ghost {
@@ -740,7 +744,6 @@
             animation: rgbFlow 4s linear infinite;
         }
 
-        /* ====== اصلاح: آیکون SVG در هاور قابل مشاهده بماند ====== */
         .action-btn--ghost:hover svg {
             stroke: url(#rgbStroke);
             -webkit-text-fill-color: currentColor;
@@ -847,7 +850,7 @@
             border-radius: calc(var(--radius-xl) + 30px);
             background: radial-gradient(circle,
                     rgba(255, 0, 128, 0.12),
-                    rgba(0, 229, 255, 0.1),
+                    rgba(59, 130, 246, 0.1),
                     transparent 65%);
             filter: blur(45px);
             z-index: -1;
@@ -877,7 +880,7 @@
             animation: rgbFlow 3s linear infinite;
             box-shadow:
                 0 0 12px rgba(255, 0, 128, 0.8),
-                0 0 24px rgba(0, 229, 255, 0.6);
+                0 0 24px rgba(59, 130, 246, 0.6);
         }
 
         /* ==========================================================================
@@ -987,7 +990,7 @@
             box-shadow:
                 0 24px 50px rgba(0, 0, 0, 0.9),
                 0 0 30px rgba(255, 0, 128, 0.1),
-                0 0 60px rgba(0, 229, 255, 0.06);
+                0 0 60px rgba(59, 130, 246, 0.06);
         }
 
         .expertise-card:hover::after {
@@ -1008,7 +1011,6 @@
             transition: all 0.55s var(--easing);
         }
 
-        /* ====== اصلاح: جایگزینی var(--lime) با رنگ معتبر ====== */
         .expertise-card:hover .expertise-icon {
             color: var(--rgb-pink);
             border-color: rgba(255, 0, 128, 0.4);
@@ -1083,7 +1085,7 @@
             animation: rgbFlow 3s linear infinite;
             box-shadow:
                 0 0 10px rgba(255, 0, 128, 0.8),
-                0 0 20px rgba(0, 229, 255, 0.5);
+                0 0 20px rgba(59, 130, 246, 0.5);
         }
 
         .journey-info {
@@ -1242,7 +1244,7 @@
             transform: translateY(-4px);
             box-shadow:
                 0 20px 45px rgba(0, 0, 0, 0.9),
-                0 0 30px rgba(160, 51, 255, 0.1);
+                0 0 30px rgba(124, 58, 237, 0.1);
         }
 
         .cert-media {
@@ -1309,7 +1311,7 @@
             transform: translateY(-3px);
             box-shadow:
                 0 20px 40px rgba(0, 0, 0, 0.9),
-                0 0 25px rgba(0, 255, 136, 0.1);
+                0 0 25px rgba(168, 85, 247, 0.1);
         }
 
         .education-type {
@@ -1401,7 +1403,7 @@
             left: -20%;
             width: 60%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.05), transparent 60%);
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.05), transparent 60%);
             pointer-events: none;
             animation: contactGlowL 9s ease-in-out infinite;
         }
@@ -1448,7 +1450,7 @@
             transform: translateY(-2px);
             box-shadow:
                 0 12px 30px rgba(255, 0, 128, 0.3),
-                0 0 40px rgba(0, 229, 255, 0.2);
+                0 0 40px rgba(59, 130, 246, 0.2);
         }
 
         .contact-action--outline {
@@ -1470,7 +1472,6 @@
             animation: rgbFlow 4s linear infinite;
         }
 
-        /* ====== اصلاح: آیکون SVG در هاور قابل مشاهده بماند ====== */
         .contact-action--outline:hover svg {
             stroke: url(#rgbStroke);
             -webkit-text-fill-color: currentColor;
@@ -1865,17 +1866,17 @@
 
 <body>
 
-    <!-- SVG Sprite با گرادیان RGB برای stroke آیکون ها -->
+    <!-- SVG Sprite با گرادیان Pinks/Purples/Blues -->
     <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
             <linearGradient id="rgbStroke" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#ff0080" />
-                <stop offset="16%" stop-color="#ff8c00" />
-                <stop offset="33%" stop-color="#ffd93d" />
-                <stop offset="50%" stop-color="#00ff88" />
-                <stop offset="66%" stop-color="#00e5ff" />
-                <stop offset="83%" stop-color="#2979ff" />
-                <stop offset="100%" stop-color="#a033ff" />
+                <stop offset="16%" stop-color="#ff2d9f" />
+                <stop offset="33%" stop-color="#e879f9" />
+                <stop offset="50%" stop-color="#a855f7" />
+                <stop offset="66%" stop-color="#7c3aed" />
+                <stop offset="83%" stop-color="#6366f1" />
+                <stop offset="100%" stop-color="#3b82f6" />
             </linearGradient>
         </defs>
         <symbol id="i-hardware" viewBox="0 0 24 24">
